@@ -14,8 +14,8 @@ class PhotoSeeder extends Seeder
      */
     public function run(): void
     {
-        $MenPlayer = ['joueur1.png', 'joueur2.png', 'joueur3.png', 'joueur4.png', 'joueur5.png'];
-        $WomenPlayer = ['joueuse1.png', 'joueuse2.png', 'joueuse3.png'];
+        $MenPlayer = ['/joueurs/joueur1.png', '/joueurs/joueur2.png', '/joueurs/joueur3.png', '/joueurs/joueur4.png', '/joueurs/joueur5.png'];
+        $WomenPlayer = ['/joueurs/joueuse1.png', '/joueurs/joueuse2.png', '/joueurs/joueuse3.png'];
 
         $joueurs = Joueur::where('genre','homme')->get();
         $joueuses = Joueur::where('genre', 'femme')->get();
