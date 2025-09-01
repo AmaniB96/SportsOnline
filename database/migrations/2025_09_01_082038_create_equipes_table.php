@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('equipes', function (Blueprint $table) {
             $table->id();
-            $table->string('nom');
+            $table->string('nom')->unique();
             $table->string('ville');
             $table->foreignId('continent_id')->constrained('continents');
-            $table->enum('type',['homme','femme','mixte']);
+            $table->foreignId('genre')->nullable()->constrained('genres')->nullOnDelete();
+            $table->string('logo');
             $table->timestamps();
         });
     }
