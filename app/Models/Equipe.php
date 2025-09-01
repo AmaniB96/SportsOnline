@@ -7,9 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Equipe extends Model
 {
-    protected $fillable = ['id','nom','ville','continent_id','genre_id','logo'];
-    /** @use HasFactory<\Database\Factories\EquipeFactory> */
-    use HasFactory;
+    protected $fillable = ['nom','ville','continent_id','genre_id','logo'];
     public function genre(){
         return $this->belongsTo(Genre::class);
     }
