@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Joueur;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,6 @@ class JoueurSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+       Joueur::factory()->create();
     }
 }

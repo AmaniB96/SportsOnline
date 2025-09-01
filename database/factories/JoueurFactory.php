@@ -17,7 +17,16 @@ class JoueurFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'nom' => fake()->lastName(),
+            'prenom' => fake()->firstName(),
+            'age' => fake()->numberBetween(15,45),
+            'phone' => fake()->phoneNumber(),
+            'email' => fake()->safeEmail(),
+            'pays' => fake()->country(),
+            'position_id' => null,
+            'equipe_id' => null,
+            'genre_id' => null,
+            'user_id' => null,
         ];
     }
 }
