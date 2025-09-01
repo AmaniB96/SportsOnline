@@ -13,6 +13,16 @@ return new class extends Migration
     {
         Schema::create('joueurs', function (Blueprint $table) {
             $table->id();
+            $table->string('nom');
+            $table->string('prenom');
+            $table->unsignedInteger('age');
+            $table->string('phone');
+            $table->string('email');
+            $table->string('pays');
+            $table->foreignId('position_id')->constrained('positions');
+            $table->foreignId('equipe_id')->nullable()->constrained('equipes')->nullOnDelete();
+            $table->foreignId('genre_id')->constrained('genres');
+            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamps();
         });
     }
