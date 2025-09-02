@@ -15,6 +15,7 @@ Route::resource('back/player', JoueurController::class)->names('back.player');
 Route::resource('back/equipe', EquipeController::class)->names('back.equipe');
 Route::resource('back/user',UserController::class)->names('back.user');
 
+Route::get('/show/{id}', [JoueurController::class, 'show'])->name('joueur.show');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
