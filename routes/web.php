@@ -1,14 +1,15 @@
 <?php
 
 use App\Http\Controllers\EquipeController;
-use App\Http\Controllers\homeController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JoueurController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [homeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/equipe', [HomeController::class, 'equipe'])->name('home.equipe');
 Route::get('/show/{id}', [HomeController::class, 'show'])->name('home.show');
+Route::get('/back', [HomeController::class,'back'])->name('home.back');
 
 Route::resource('back/player', JoueurController::class)->names('back.player');
 Route::resource('back/equipe', EquipeController::class)->names('back.equipe');
