@@ -8,7 +8,10 @@
 </head>
 <body>
     <header>
+        
         @include('layouts.Components.nav_back')
+        
+        
     </header>
     <main>
 
