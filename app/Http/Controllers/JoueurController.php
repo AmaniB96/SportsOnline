@@ -84,7 +84,7 @@ class JoueurController extends Controller
         
         $photo->update();
 
-        return redirect()->route('home')
+        return redirect()->route('home');
     }
 
     public function destroy($id) {
