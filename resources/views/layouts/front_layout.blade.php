@@ -9,10 +9,7 @@
 </head>
 <body>
     <header>
-        <nav>
-            <a href="{{ route('home') }}">Accueil</a>
-            <a href="{{ route('home.equipe') }}">Équipes</a>
-        </nav>
+        @include('layouts.Component.nav')
     </header>
 
     <main>
