@@ -1,9 +1,9 @@
 @extends('layouts.back_layout')
 
-@section('title','{{ $equipe->nom }}')
+@section('title','back')
 
 @section('content')
     <section>
-        <h1>Vous etes dans la page backShowEquipe</h1>
+        <h1>Vous etes dans la page backHome</h1>
     </section>
 @endsection

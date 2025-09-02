@@ -21,5 +21,7 @@ class homeController extends Controller
         $equipe = Equipe::findOrFail($id);
         return view('front.show_player',compact('equipe'));
     }
-    public function 
+    public function back(){
+        return view('back.home');
+    }
 }
