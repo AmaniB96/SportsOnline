@@ -14,4 +14,5 @@ class Genre extends Model
     public function equipe() {
         return $this->hasMany(Equipe::class);
     }
+    
 }
