@@ -80,7 +80,7 @@ class JoueurController extends Controller
         $file = $request->file('image');
         $filename = time().''.$file->GetClientOriginalName();
         $path = $file->storeAs('joueurs', $filename, 'public');
-        $photo->src = $path
+        $photo->src = $path;
         
         $photo->update();
 
