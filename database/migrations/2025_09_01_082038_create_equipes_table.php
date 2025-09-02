@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nom')->unique();
             $table->string('ville');
             $table->foreignId('continent_id')->constrained('continents');
-            $table->foreignId('genre')->nullable()->constrained('genres')->nullOnDelete();
+            $table->foreignId('genre_id')->nullable()->constrained('genres')->nullOnDelete();
             $table->string('logo');
             $table->timestamps();
         });
