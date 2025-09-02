@@ -21,7 +21,7 @@ class PhotoSeeder extends Seeder
             $query->where('nom', 'homme');
         })->get();
         $joueuses = Joueur::whereHas('genre', function($query) {
-            $query->where('nom', 'homme');
+            $query->where('nom', 'femme');
         })->get();
 
         foreach ($joueurs as $joueur) {
