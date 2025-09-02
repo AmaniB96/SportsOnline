@@ -14,8 +14,8 @@ class HomeController extends Controller
         return view('home',compact('equipes','joueurs'));
     }
     public function equipe(){
-        $equipes = Equipe::all();
-        return view('front.equipe');
+        $equipes = Equipe::with('joueurs.position', 'joueurs.genre')->get();;
+        return view('front.equipe', compact('equipes'));
     }
     public function show_player($id){
         $equipe = Equipe::findOrFail($id);

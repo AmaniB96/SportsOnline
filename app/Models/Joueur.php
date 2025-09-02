@@ -9,7 +9,9 @@ class Joueur extends Model
 {
     /** @use HasFactory<\Database\Factories\JoueurFactory> */
     use HasFactory;
-    protected $fillable = ['nom, prenom, age, phone, email, pays, position_id, equipe_id, genre_id, user_id'];
+    protected $fillable = [
+    'nom', 'prenom', 'age', 'phone', 'email', 'pays', 'position_id', 'equipe_id', 'genre_id', 'user_id'
+];
 
     public function position() {
         return $this->belongsTo(Position::class);
