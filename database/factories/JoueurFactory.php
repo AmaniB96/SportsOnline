@@ -29,4 +29,12 @@ class JoueurFactory extends Factory
             'user_id' => null,
         ];
     }
+    public function withRole(...$arg)
+    {
+        return $this->state(fn (array $attributes) => [
+            'position_id' => $arg[0],
+            'equipe_id' => $arg[1] ?? null,
+            'genre_id' => $arg[2],
+        ]);
+    }
 }
