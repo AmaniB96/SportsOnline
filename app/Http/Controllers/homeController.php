@@ -2,17 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Equipe;
+use App\Models\Joueur;
 use Illuminate\Http\Request;
 
 class homeController extends Controller
 {
     public function index(){
-        return view('home');
+        $equipes = Equipe::all();
+        $joueurs = Joueur::all();
+        return view('home',compact('equipes','joueurs'));
     }
     public function equipe(){
+        $equipes = Equipe::all();
         return view('front.equipe');
     }
-    public function show_player(){
-        return view('front.show');
+    public function show_player($id){
+        $equipe = Equipe::findOrFail($id);
+        return view('front.show_player',compact('equipe'));
     }
 }
