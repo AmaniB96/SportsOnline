@@ -20,10 +20,10 @@
         <div class="flex shrink-0 items-center">
           <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company" class="h-8 w-auto" />
         </div>
-        <div class="hidden sm:ml-6 sm:block">
+        <div class="sm:ml-6 flex gap-5">
           <div class="flex space-x-4">
             <a href="{{ route('home') }}" aria-current="page" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white">Accueil</a>
-            <a href="{{ route('home.equipe') }}">Équipes</a>
+            <a href="{{ route('home.equipe') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Équipes</a>
           </div>
           <div class="flex space-x-4">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-white/5 hover:text-white" -->
