@@ -13,16 +13,15 @@ class JoueurController extends Controller
 {
     public function index() {
         $joueurs = Joueur::all();
-        return view('back.player_index', compact('joueurs'));
+        return view('back.player', compact('joueurs'));
     }
     
     public function create() {
         $joueurs = Joueur::all();
         $genres = Genre::all();
         $equipes = Equipe::all();
-        $photos = Photo::all();
         $positions = Position::all();
-        return view('back.player_create', compact('joueurs', 'genres', 'equipes', 'photos', 'positions'));
+        return view('back.player_create', compact('joueurs', 'genres', 'equipes', 'positions'));
     }
 
     public function store(Request $request) {
@@ -52,12 +51,12 @@ class JoueurController extends Controller
         return redirect()->route('home');
     }
 
-    public function edit($id) {
+    public function show($id) {
         $joueurs = Joueur::findOrFail($id);
         $genres = Genre::all();
         $equipes = Equipe::all();
         $positions = Position::all();
-        return view('back.player_index', compact('joueurs', 'genres', 'equipes', 'photos', 'positions'));
+        return view('back.player_show', compact('joueurs', 'genres', 'equipes', 'photos', 'positions'));
     }
 
     public function update(Request $request, $id) {
