@@ -9,7 +9,7 @@
 <body>
     <header>
         
-        @include('layouts.Components.nav_back')
+        @include('layouts.Components.nav')
         
         
     </header>
