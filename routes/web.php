@@ -4,7 +4,6 @@ use App\Http\Controllers\EquipeController;
 use App\Http\Controllers\homeController;
 use App\Http\Controllers\JoueurController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [homeController::class, 'index'])->name('home');
