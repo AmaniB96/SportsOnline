@@ -45,11 +45,11 @@ class JoueurController extends Controller
         $file = $request->file('image');
         $filename = time().''.$file->GetClientOriginalName();
         $path = $file->storeAs('joueurs', $filename, 'public');
-        $photo->src = $path
+        $photo->src = $path;
         
         $photo->save();
 
-        return redirect()->route('home')
+        return redirect()->route('home');
     }
 
     public function edit($id) {
