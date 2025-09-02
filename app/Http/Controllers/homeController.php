@@ -12,7 +12,7 @@ class homeController extends Controller
     public function equipe(){
         return view('front.equipe');
     }
-    public function show(){
+    public function show_player(){
         return view('front.show');
     }
 }
