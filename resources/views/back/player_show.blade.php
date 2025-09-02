@@ -4,6 +4,11 @@
 
 @section('content')
     <section>
-        <h1>Vous etes dans la page backPlayerShow</h1>
+        <div>
+            <h1>Vous etes dans la page backPlayerShow</h1>
+        </div>
+        <div class="flex">
+            
+        </div>
     </section>
 @endsection
