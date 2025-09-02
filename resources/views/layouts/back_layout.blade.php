@@ -7,6 +7,14 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <header>
+        
+        @include('layouts.Components.nav_back')
+        
+        
+    </header>
+    <main>
+
+    </main>
 </body>
 </html>
