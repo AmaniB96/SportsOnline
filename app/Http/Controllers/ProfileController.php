@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +12,12 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
+    public function index(){
+        $admin = User::all('id',3);
+        $user = User::all('id',1);
+        $coach = User::where('id',2);
+        return view('user',compact('admin','user','coach'));
+    }
     /**
      * Display the user's profile form.
      */
