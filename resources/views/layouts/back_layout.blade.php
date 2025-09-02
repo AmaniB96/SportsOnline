@@ -9,11 +9,14 @@
 </head>
 <body>
     <header>
-        @include('layouts.Components.nav')
+        @include('layouts.components.nav')
         
         
     </header>
     <main>
+        @yield('content')
+        @yield('content')
+        @yield('content')
         @yield('content')
 
     </main>
