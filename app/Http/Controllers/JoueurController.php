@@ -56,7 +56,7 @@ class JoueurController extends Controller
         $genres = Genre::all();
         $equipes = Equipe::all();
         $positions = Position::all();
-        return view('back.player_show', compact('joueurs', 'genres', 'equipes', 'photos', 'positions'));
+        return view('back.player_show', compact('joueurs', 'genres', 'equipes', 'positions'));
     }
 
     public function update(Request $request, $id) {

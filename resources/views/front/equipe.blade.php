@@ -14,7 +14,7 @@
                             @if($equipe->joueurs)
                                 @foreach($equipe->joueurs as $joueur)
                                     <li>
-                                        <a href="{{ route('joueur.show', $joueur->id) }}">
+                                        <a href="{{ route('home.show', $joueur->id) }}">
                                             {{ $joueur->nom }} {{ $joueur->prenom }}
                                         </a>
                                         ({{ $joueur->position->position ?? '-' }}, {{ $joueur->genre->genre ?? '-' }})
