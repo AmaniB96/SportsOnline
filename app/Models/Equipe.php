@@ -14,4 +14,5 @@ class Equipe extends Model
     public function continent(){
         return $this->belongsTo(Continent::class);
     }
+    
 }
