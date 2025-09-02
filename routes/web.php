@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EquipeController;
 use App\Http\Controllers\JoueurController;
 use App\Http\Controllers\ProfileController;

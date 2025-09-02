@@ -6,7 +6,7 @@ use App\Models\Equipe;
 use App\Models\Joueur;
 use Illuminate\Http\Request;
 
-class homeController extends Controller
+class HomeController extends Controller
 {
     public function index(){
         $equipes = Equipe::all();
