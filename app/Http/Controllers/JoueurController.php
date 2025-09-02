@@ -89,6 +89,6 @@ class JoueurController extends Controller
 
     public function destroy($id) {
         Joueur::findOrFail($id)->delete();
-        return redirect()->route('home')
+        return redirect()->route('home');
     }
 }
