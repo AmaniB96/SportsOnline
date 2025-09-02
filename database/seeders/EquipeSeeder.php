@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Equipe;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,11 +13,10 @@ class EquipeSeeder extends Seeder
      */
     public function run(): void
     {
-        [
+        $equipes = [
             [
                 'nom' => 'Real Madrid CF',
                 'ville' => 'Madrid',
-                'pays' => 'Espagne',
                 'continent_id' => 4,
                 'genre_id' => 1,
                 'logo' => 'storage/logo/Real_Madrid_CF.svg'
@@ -24,7 +24,6 @@ class EquipeSeeder extends Seeder
             [
                 'nom' => 'Paris Saint-Germain',
                 'ville' => 'Paris',
-                'pays' => 'France',
                 'continent_id' => 4,
                 'genre_id' => 1,
                 'logo' => 'storage/logo/Paris_Saint-Germain_F.C..svg'
@@ -32,7 +31,6 @@ class EquipeSeeder extends Seeder
             [
                 'nom' => 'Manchester City FC',
                 'ville' => 'Manchester',
-                'pays' => 'Angleterre',
                 'continent_id' => 4,
                 'genre_id' => 1,
                 'logo' => 'storage/logo/Manchester_City_FC_badge.svg'
@@ -40,7 +38,6 @@ class EquipeSeeder extends Seeder
             [
                 'nom' => 'Al Ahly SC',
                 'ville' => 'Le Caire',
-                'pays' => 'Égypte',
                 'continent_id' => 1,
                 'genre_id' => 1,
                 'logo' => 'storage/logo/Al_Ahly_SC.png'
@@ -48,7 +45,6 @@ class EquipeSeeder extends Seeder
             [
                 'nom' => 'Flamengo',
                 'ville' => 'Rio de Janeiro',
-                'pays' => 'Brésil',
                 'continent_id' => 2,
                 'genre_id' => 1,
                 'logo' => 'storage/logo/Logo_CR_Flamengo.svg.png'
@@ -56,7 +52,6 @@ class EquipeSeeder extends Seeder
             [
                 'nom' => 'Al Hilal SFC',
                 'ville' => 'Riyad',
-                'pays' => 'Arabie Saoudite',
                 'continent_id' => 3,
                 'genre_id' => 1,
                 'logo' => 'storage/logo/Al_Hilal_SFC.png'
@@ -64,11 +59,13 @@ class EquipeSeeder extends Seeder
             [
                 'nom' => 'Melbourne City FC Women',
                 'ville' => 'Melbourne',
-                'pays' => 'Australie',
                 'continent_id' => 5,
                 'genre_id' => 2,
                 'logo' => 'storage/logo/Melbourne_City_FC.svg.png'
             ],
         ];
+        foreach ($equipes as $equipe) {
+            Equipe::create($equipe);
+        }
     }
 }
