@@ -17,8 +17,12 @@ class PhotoSeeder extends Seeder
         $MenPlayer = ['storage/joueurs/joueur1.png', 'storage/joueurs/joueur2.png', 'storage/joueurs/joueur3.png', 'storage/joueurs/joueur4.png', 'storage/joueurs/joueur5.png'];
         $WomenPlayer = ['storage/joueurs/joueuse1.png', 'storage/joueurs/joueuse2.png', 'storage/joueurs/joueuse3.png'];
 
-        $joueurs = Joueur::where('genre','homme')->get();
-        $joueuses = Joueur::where('genre', 'femme')->get();
+        $joueurs = Joueur::whereHas('genre', function($query) {
+            $query->where('nom', 'homme');
+        })->get();
+        $joueuses = Joueur::whereHas('genre', function($query) {
+            $query->where('nom', 'homme');
+        })->get();
 
         foreach ($joueurs as $joueur) {
             Photo::create([
