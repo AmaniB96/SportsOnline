@@ -1,0 +1,288 @@
+:root {
+    --primary: #38b6ff;
+    --secondary: #004e92;
+    --dark: #1a1a1a;
+    --light: #f5f5f5;
+    --gold: #d4af37;
+    --silver: #c0c0c0;
+    --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+    --gradient-female: linear-gradient(135deg, #e87f6f, #d81b1b);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.joueur-detail-container {
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+
+.joueur-profile {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    display: grid;
+    grid-template-columns: 300px 1fr;
+}
+
+.joueur-header {
+    background: linear-gradient(135deg, var(--gold), #ffd700);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    position: relative;
+}
+
+.joueur-header-female {
+    background: var(--gradient-female);
+}
+
+.joueur-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid white;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.joueur-img-placeholder {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--dark);
+    border: 5px solid white;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.player-rating {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--dark);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.player-position {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: var(--dark);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.joueur-info {
+    padding: 30px;
+}
+
+.joueur-info h1 {
+    font-size: 2.2rem;
+    color: var(--dark);
+    margin-bottom: 20px;
+    font-weight: 700;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 15px;
+}
+
+.joueur-badges {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.badge {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    border-left: 4px solid var(--primary);
+}
+
+.badge .label {
+    color: #777;
+    font-size: 0.85rem;
+    margin-bottom: 5px;
+}
+
+.badge .value {
+    color: var(--dark);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.player-stats-container {
+    margin: 30px 0;
+}
+
+.stats-title {
+    font-size: 1.3rem;
+    color: var(--secondary);
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.player-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.stat-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.stat-label {
+    width: 70px;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.stat-track {
+    flex-grow: 1;
+    height: 10px;
+    background: #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.stat-fill {
+    height: 100%;
+    background: var(--gradient);
+    border-radius: 5px;
+}
+
+.stat-value {
+    width: 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--dark);
+    text-align: right;
+}
+
+.joueur-equipe-section {
+    margin-top: 30px;
+}
+
+.joueur-equipe-section h3 {
+    color: var(--secondary);
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.equipe-card {
+    display: flex;
+    align-items: center;
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.equipe-logo {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    margin-right: 15px;
+}
+
+.equipe-info {
+    flex-grow: 1;
+}
+
+.equipe-info h4 {
+    font-size: 1.1rem;
+    color: var(--dark);
+    margin-bottom: 5px;
+}
+
+.equipe-info p {
+    color: #777;
+    font-size: 0.9rem;
+}
+
+.btn-equipe {
+    background: var(--primary);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+}
+
+.btn-equipe:hover {
+    background: var(--secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+}
+
+.sans-equipe {
+    background: #fff5f5;
+    border-left: 4px solid #ff6b6b;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.sans-equipe h3 {
+    color: #e03131;
+    margin-bottom: 10px;
+}
+
+.sans-equipe p {
+    color: #666;
+}
+
+.back-link {
+    margin-top: 30px;
+}
+
+.btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #f0f0f0;
+    color: var(--dark);
+    padding: 10px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.btn-back:hover {
+    background: #e0e0e0;
+}
+

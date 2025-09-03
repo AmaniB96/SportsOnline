@@ -4,54 +4,64 @@
 
 @section('content')
     @vite(['resources/css/home.css'])
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
     <div class="hero-carousel">
-    <div id="sportsCarousel" class="carousel slide" data-bs-ride="carousel">
-        <!-- Indicateurs -->
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#sportsCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#sportsCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#sportsCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        </div>
-        
-        <!-- Contenu du carousel -->
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <div class="overlay"></div>
-                <img src="https://wallpapercave.com/wp/wp4430266.jpg" class="d-block w-100" alt="Football">
-                <div class="carousel-caption">
-                    <h2>Le football dans toute sa splendeur</h2>
-                    <p>Découvrez les plus grandes équipes européennes</p>
+        <div id="default-carousel" class="relative w-full" data-carousel="slide">
+            <!-- Carousel wrapper -->
+            <div class="relative h-56 overflow-hidden md:h-96">
+                <!-- Item 1 -->
+                <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
+                    <div class="overlay absolute inset-0 bg-black/50 z-10"></div>
+                    <img src="https://wallpapercave.com/wp/wp4430266.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Football">
+                    <div class="carousel-caption absolute z-20 text-center text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full px-4">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-2">Le football dans toute sa splendeur</h2>
+                        <p class="text-lg md:text-xl">Découvrez les plus grandes équipes européennes</p>
+                    </div>
+                </div>
+                <!-- Item 2 -->
+                <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                    <div class="overlay absolute inset-0 bg-black/50 z-10"></div>
+                    <img src="https://wallpapercave.com/wp/wp5141406.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Joueurs">
+                    <div class="carousel-caption absolute z-20 text-center text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full px-4">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-2">Les meilleurs joueurs du monde</h2>
+                        <p class="text-lg md:text-xl">Découvrez les athlètes qui font vibrer les stades</p>
+                    </div>
+                </div>
+                <!-- Item 3 -->
+                <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                    <div class="overlay absolute inset-0 bg-black/50 z-10"></div>
+                    <img src="https://wallpapercave.com/wp/J8wrQqn.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="International">
+                    <div class="carousel-caption absolute z-20 text-center text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full px-4">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-2">Le football international</h2>
+                        <p class="text-lg md:text-xl">Des équipes venues des quatre coins du monde</p>
+                    </div>
                 </div>
             </div>
-            <div class="carousel-item">
-                <div class="overlay"></div>
-                <img src="https://wallpapercave.com/wp/wp5141406.jpg" class="d-block w-100" alt="Joueurs">
-                <div class="carousel-caption">
-                    <h2>Les meilleurs joueurs du monde</h2>
-                    <p>Découvrez les athlètes qui font vibrer les stades</p>
-                </div>
+            
+            <!-- Slider indicators -->
+            <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+                <button type="button" class="w-3 h-3 rounded-full bg-white" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+                <button type="button" class="w-3 h-3 rounded-full bg-white/50" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
+                <button type="button" class="w-3 h-3 rounded-full bg-white/50" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
             </div>
-            <div class="carousel-item">
-                <div class="overlay"></div>
-                <img src="https://wallpapercave.com/wp/J8wrQqn.jpg" class="d-block w-100" alt="International">
-                <div class="carousel-caption">
-                    <h2>Le football international</h2>
-                    <p>Des équipes venues des quatre coins du monde</p>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Contrôles -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#sportsCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#sportsCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
+            
+            <!-- Slider controls -->
+            <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 group-focus:ring-4 group-focus:ring-white group-focus:outline-none">
+                    <svg class="w-4 h-4 text-white rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+                    </svg>
+                    <span class="sr-only">Previous</span>
+                </span>
+            </button>
+            <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 group-focus:ring-4 group-focus:ring-white group-focus:outline-none">
+                    <svg class="w-4 h-4 text-white rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                    </svg>
+                    <span class="sr-only">Next</span>
+                </span>
+            </button>
         </div>
     </div>
 
@@ -213,5 +223,5 @@
                 @endif
             </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     </section>
+@endsection
