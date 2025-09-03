@@ -190,7 +190,7 @@
                         </div>
                         <div class="fut-card-content">
                             @if($joueur->photo)
-                                <img src="{{ asset('storage/' . $joueur->photo->src) }}" class="fut-player-img" alt="{{ $joueur->nom }}">
+                                <img src="{{ asset( $joueur->photo->src) }}" class="fut-player-img" alt="{{ $joueur->nom }}">
                             @endif
                             <div class="fut-player-name">{{ $joueur->nom }}</div>
                             <div class="fut-player-stats">
