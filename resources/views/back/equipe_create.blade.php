@@ -39,7 +39,8 @@
                     Continent
                 </label>
                 <select name="continent_id" id="continent"
-                        class="block w-full mb-4 p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                    class="block w-full mb-4 p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                >
                     <option value="">Sélectionnez le continent</option>
                     @foreach($continents as $continent)
                         <option value="{{ $continent->id }}" 
