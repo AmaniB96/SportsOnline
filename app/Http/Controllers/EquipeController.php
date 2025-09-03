@@ -26,16 +26,28 @@ class EquipeController extends Controller
     }
     public function store(){
         request()->validate([
-            'nom'=>['min:6','string','required'],
-            'ville'=>['min:6','string','required'],
-            'continent_id'=>['required','integer']
+            'nom' => ['required', 'string', 'min:6'],
+            'ville' => ['required', 'string', 'min:6'],
+            'continent_id' => ['required', 'integer', 'exists:continents,id'],
+            'genre_id' => ['nullable', 'integer', 'exists:genres,id'],
+            'logo' => ['nullable', 'image', 'max:2048'],
         ]);
+
+        if (request()->hasFile('logo')) {
+            $file = request()->file('logo');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $path = $file->storeAs('logo', $filename, 'public');
+            $pathSt = "storage/$path";
+        } else {
+            $pathSt = 'storage/logo/default_equipe.png';
+        }
+
         Equipe::create([
             'nom'=>request('nom'),
             'ville'=>request('ville'),
             'continent_id'=>request('continent_id'),
             'genre_id'=>request('genre_id'),
-            'logo'=>request('logo'),
+            'logo'=>$pathSt,
         ]);
         return redirect()->Route('back.equipe.index');
     }
