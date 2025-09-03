@@ -1,10 +1,10 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EquipeController;
 use App\Http\Controllers\JoueurController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [homeController::class, 'index'])->name('home');
@@ -20,7 +20,10 @@ Route::resource('back/user',ProfileController::class)->names('back.user');
 
 Route::get('/show/{id}', [JoueurController::class, 'show'])->name('joueur.show');
 
+Route::get('/login', [AuthenticatedSessionController::class, 'create'])
+    ->name('login');
 
+Route::post('/login', [AuthenticatedSessionController::class, 'store']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

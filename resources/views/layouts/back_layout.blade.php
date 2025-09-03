@@ -10,8 +10,6 @@
 <body>
     <header>
         @include('layouts.components.nav')
-        
-        
     </header>
     <main>
         @yield('content')

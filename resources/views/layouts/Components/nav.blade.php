@@ -44,17 +44,36 @@
 
         <!-- Profile dropdown -->
         <el-dropdown class="relative ml-3">
-          <button class="relative flex rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
-              <span class="absolute -inset-1.5"></span>
-              <span class="sr-only">Open user menu</span>
-              <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                  alt=""
-                  class="size-8 rounded-full bg-gray-800 outline -outline-offset-1 outline-white/10" />
-          </button>
+          <div class="flex gap-4 place-items-center">
+            @auth
+            <div>
+              <p class="text-white">
+                {{ auth()->user()->prenom }}
+              </p>
+              <p class="text-white">
+                {{ auth()->user()->nom }}
+              </p>
+            </div>
+            @else
+              <div>
+                <p class="text-white">
+                  pas connecter
+                </p>
+              </div>
+            @endauth
+            <button class="relative flex rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
+                <span class="absolute -inset-1.5"></span>
+                <span class="sr-only">Open user menu</span>
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    alt=""
+                    class="size-8 rounded-full bg-gray-800 outline -outline-offset-1 outline-white/10"
+                />
+            </button>
+          </div>
 
           <el-menu anchor="top end" popover class="w-48 mt-5 origin-top-right rounded-md bg-white py-1 shadow-lg outline outline-black/5 transition transition-discrete ...">
               @auth
-                  <a href="{{ route('profile.show') }}" class="block px-4 py-2 text-sm text-gray-700 focus:bg-gray-100 focus:outline-hidden">Your profile</a>
+                  {{-- <a href="{{ route('profile.show') }}" class="block px-4 py-2 text-sm text-gray-700 focus:bg-gray-100 focus:outline-hidden">Your profile</a> --}}
                   <a href="{{ route('logout') }}"
                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                     class="block px-4 py-2 text-sm text-gray-700 focus:bg-gray-100 focus:outline-hidden">Sign out</a>
