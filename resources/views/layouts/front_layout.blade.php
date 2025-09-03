@@ -10,6 +10,9 @@
 <body>
     <header>
         @include('layouts.Components.nav')
+        {{-- @if (session('notAcces'))
+            <p class="text-red-600 mt-10">vous n'avez pas les perm</p>
+        @endif --}}
     </header>
 
     <main>
