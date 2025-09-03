@@ -53,7 +53,7 @@ class JoueurController extends Controller
         $filename = time().''.$file->GetClientOriginalName();
         $path = $file->storeAs('joueurs', $filename, 'public');
         $photo->src = $path;
-        $photo->joueur_id = $request->joueur->id;
+        $photo->joueur_id = $joueur->id;
         
         $photo->save();
 

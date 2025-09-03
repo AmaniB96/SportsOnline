@@ -20,6 +20,7 @@
                 <table class="w-full border-collapse text-gray-700 dark:text-gray-200">
                     <thead>
                         <tr class="bg-gray-200 dark:bg-gray-700 text-left">
+                            <th class="p-2 border">image</th>
                             <th class="p-2 border">Nom</th>
                             <th class="p-2 border">Prénom</th>
                             <th class="p-2 border">Âge</th>
@@ -35,7 +36,8 @@
                     </thead>
                     <tbody>
                         @foreach($joueurs as $joueur)
-                            <tr class="border-b hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <tr class="border-b hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <td class="p-2 border"><img src="{{ asset($joueur->photo->src)}}" alt="{{ $joueur->nom }}"></td>
                                 <td class="p-2 border">{{ $joueur->nom }}</td>
                                 <td class="p-2 border">{{ $joueur->prenom }}</td>
                                 <td class="p-2 border">{{ $joueur->age }}</td>
