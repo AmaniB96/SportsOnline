@@ -25,6 +25,11 @@ class EquipeController extends Controller
         return view('back.player_create',compact('genres','continents'));
     }
     public function store(){
+        request()->validate([
+            'nom'=>['min:6','string','required'],
+            'ville'=>['min:6','string','required'],
+            'continent_id'=>['required','integer']
+        ]);
         Equipe::create([
             'nom'=>request('nom'),
             'ville'=>request('ville'),

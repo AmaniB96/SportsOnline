@@ -44,10 +44,9 @@
                 <label for="genre_id" class="block text-sm font-medium text-gray-700">Genre</label>
                 <select id="genre_id" name="genre_id"
                     class="mt-1 block w-full rounded-xl border border-gray-300 p-3 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
-                    <option value="">-- Sélectionner --</option>
+                    <option value="">mixte</option>
                     <option value="1">Homme</option>
                     <option value="2">Femme</option>
-                    <option value="3">Autre</option>
                 </select>
                 </div>
 
