@@ -3,9 +3,9 @@
 @section('title','liste Equipe')
 
 @section('content')
-    <section>
-        <div class="title">
-            <h1>Vous etes dans la page backEquipe</h1>
+    <section class="m-5">
+        <div class="title mb-5">
+            <h1 class="mb-5">Liste des equipes</h1>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
             @foreach ($equipes as $equipe)
@@ -39,6 +39,12 @@
                 </div>
             @endforeach
         </div>
-
+    </section>
+    <section class="m-5">
+        <div>
+            <a href="{{ route('back.equipe.create',$equipe->id) }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Crée une nouvelle team
+            </a>
+        </div>
     </section>
 @endsection
