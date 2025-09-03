@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 class JoueurController extends Controller
 {
     public function index() {
-        $joueurs = Joueur::all();
+        $joueurs = Joueur::orderBy('equipe_id','desc')->get();
         return view('back.player', compact('joueurs'));
     }
     
@@ -52,11 +52,11 @@ class JoueurController extends Controller
     }
 
     public function show($id) {
-        $joueurs = Joueur::findOrFail($id);
+        $joueur = Joueur::findOrFail($id);
         $genres = Genre::all();
         $equipes = Equipe::all();
         $positions = Position::all();
-        return view('back.player_show', compact('joueurs', 'genres', 'equipes', 'positions'));
+        return view('back.player_show', compact('joueur', 'genres', 'equipes', 'positions'));
     }
 
     public function update(Request $request, $id) {
@@ -83,11 +83,11 @@ class JoueurController extends Controller
         
         $photo->update();
 
-        return redirect()->route('home');
+        return redirect()->route('back.player.show');
     }
 
     public function destroy($id) {
         Joueur::findOrFail($id)->delete();
-        return redirect()->route('home');
+        return redirect()->back();
     }
 }
