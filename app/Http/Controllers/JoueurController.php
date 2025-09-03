@@ -52,11 +52,11 @@ class JoueurController extends Controller
     }
 
     public function show($id) {
-        $joueurs = Joueur::findOrFail($id);
+        $joueur = Joueur::findOrFail($id);
         $genres = Genre::all();
         $equipes = Equipe::all();
         $positions = Position::all();
-        return view('back.player_show', compact('joueurs', 'genres', 'equipes', 'positions'));
+        return view('back.player_show', compact('joueur', 'genres', 'equipes', 'positions'));
     }
 
     public function update(Request $request, $id) {

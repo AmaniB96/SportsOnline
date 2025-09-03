@@ -3,6 +3,13 @@
 @section('title', 'Liste des Joueurs')
 
 @section('content')
+    <section class="m-5">
+        <div>
+            <a href="{{ route('back.equipe.create') }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Crée une nouvelle team
+            </a>
+        </div>
+    </section>
     <section class="m-10 p-6 bg-white rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
         <div class="bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 p-4">
             <h1 class="text-xl font-bold mb-4 text-gray-700 dark:text-gray-200">Liste des Joueurs</h1>

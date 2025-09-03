@@ -30,7 +30,7 @@ class EquipeController extends Controller
             'ville' => ['required', 'string', 'min:6'],
             'continent_id' => ['required', 'integer', 'exists:continents,id'],
             'genre_id' => ['nullable', 'integer', 'exists:genres,id'],
-            'logo' => ['nullable', 'image', 'max:2048'],
+            'logo' => ['required', 'image', 'max:2048'],
         ]);
 
         if (request()->hasFile('logo')) {
@@ -38,9 +38,7 @@ class EquipeController extends Controller
             $filename = time() . '_' . $file->getClientOriginalName();
             $path = $file->storeAs('logo', $filename, 'public');
             $pathSt = "storage/$path";
-        } else {
-            $pathSt = 'storage/logo/default_equipe.png';
-        }
+        } 
 
         Equipe::create([
             'nom'=>request('nom'),
