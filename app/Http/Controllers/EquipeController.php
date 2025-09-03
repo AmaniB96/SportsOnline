@@ -22,11 +22,11 @@ class EquipeController extends Controller
     public function create(){
         $genres = Genre::all();
         $continents = Continent::all();
-        return view('back.player_create',compact('genres','continents'));
+        return view('back.equipe_create',compact('genres','continents'));
     }
     public function store(){
         request()->validate([
-            'nom' => ['required', 'string', 'min:6'],
+            'nom' => ['required', 'string', 'min:6','unique:equipes,nom'],
             'ville' => ['required', 'string', 'min:6'],
             'continent_id' => ['required', 'integer', 'exists:continents,id'],
             'genre_id' => ['nullable', 'integer', 'exists:genres,id'],
@@ -49,11 +49,12 @@ class EquipeController extends Controller
             'genre_id'=>request('genre_id'),
             'logo'=>$pathSt,
         ]);
-        return redirect()->Route('back.equipe.index');
+
+        return redirect()->route('back.equipe.index');
     }
     public function destroy($id){
         Equipe::findOrFail($id)->delete();
-        return redirect()->Route('back.equipe.index');
+        return redirect()->route('back.equipe.index');
     }
     public function update($id,Request $request){
         
@@ -73,6 +74,6 @@ class EquipeController extends Controller
             'continent_id' => request('continent_id'),
             'genre_id' => $genre_id,
         ]);
-        return redirect()->Route('back.equipe.index');
+        return redirect()->route('back.equipe.index');
     }
 }

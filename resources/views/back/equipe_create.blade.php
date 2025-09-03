@@ -18,7 +18,7 @@
             @endif
 
             <div class="flex justify-center items-center mb-4">
-                <h1>Créer une équipe</h1>
+                <h1 class="mb-2 text-xl sm:text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Créer une équipe</h1>
             </div>
 
             <form action="{{ route('back.equipe.store') }}" method="POST" enctype="multipart/form-data" class="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md dark:bg-gray-800">
