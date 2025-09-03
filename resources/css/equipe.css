@@ -1,0 +1,87 @@
+.container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .equipes-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 20px;
+        }
+
+        .equipe-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background-color: white;
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background-color: #f8f9fa;
+            cursor: pointer;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .header-content {
+            flex-grow: 1;
+        }
+
+        .equipe-details {
+            margin-top: 5px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .badge {
+            background-color: #6c757d;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+
+        h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #212529;
+        }
+
+        .joueurs-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .equipe-card:hover .joueurs-list,
+        .equipe-card:focus-within .joueurs-list {
+            max-height: 500px; /* Ajuste selon tes besoins */
+        }
+
+        .joueurs-list li {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .joueurs-list li:last-child {
+            border-bottom: none;
+        }
+
+        .joueurs-list a {
+            color: #0d6efd;
+            text-decoration: none;
+        }
+
+        .joueurs-list a:hover {
+            text-decoration: underline;
+        }
