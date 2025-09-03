@@ -13,9 +13,9 @@
                 />
             </div>
 
-            <form action="{{ route('back.equipe.store',$equipe->id) }}" method="POST" enctype="multipart/form-data" class="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md dark:bg-gray-800">
+            <form action="{{ route('back.equipe.update',$equipe->id) }}" method="POST" enctype="multipart/form-data" class="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md dark:bg-gray-800">
                 @csrf
-
+                @method('PUT')
                 <label class="block mb-2 font-medium text-gray-700 dark:text-gray-300" for="nom">
                     Nom de l'équipe
                 </label>
@@ -40,30 +40,27 @@
                     value="{{ $equipe->ville }}"
                 />
 
+                
+
                 <label class="block mb-2 font-medium text-gray-700 dark:text-gray-300" for="continent">
                     Continent
                 </label>
-                <input 
-                    type="text" 
-                    name="continent" 
-                    id="continent"
-                    placeholder="Entrez le continent"
-                    class="block w-full mb-4 p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                    value="{{ $equipe->continent->nom }}"
-                />
+                <select name="continent_id" id="continent"
+                        class="block w-full mb-4 p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                    @foreach($continents as $continent)
+                        <option value="{{ $continent->id }}" 
+                            @selected(old('continent_id', $equipe->continent_id) == $continent->id)>
+                            {{ ucfirst($continent->nom) }}
+                        </option>
+                    @endforeach
+                </select>
 
-                <label class="block mb-2 font-medium text-gray-700 dark:text-gray-300" for="genre">
-                    Genre
-                </label>
-                <select 
-                    name="genre" 
-                    id="genre"
-                    class="block w-full mb-4 p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                >
-                    <option value="">Sélectionnez le genre</option>
-                    <option value="homme" {{ (isset($equipe->genre) && $equipe->genre->genre === 'homme') ? 'selected' : '' }}>Homme</option>
-                    <option value="femme" {{ (isset($equipe->genre) && $equipe->genre->genre === 'femme') ? 'selected' : '' }}>Femme</option>
-                    <option value="mixte" {{ (isset($equipe->genre) && !$equipe->genre->genre) ? 'selected' : '' }}>Mixte</option>
+                <label for="genre" class="block mb-2 font-medium text-gray-700 dark:text-gray-300">Genre</label>
+                <select name="genre_id" id="genre" class="block w-full mb-4 p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                    <option value="" @selected(is_null(old('genre_id', $equipe->genre_id)))>Mixte</option>
+                    @foreach($genres as $genre)
+                        <option value="{{ $genre->id }}" @selected(old('genre_id', $equipe->genre_id) == $genre->id)>{{ ucfirst($genre->genre) }}</option>
+                    @endforeach
                 </select>
 
                 <label class="block mb-2 font-medium text-gray-700 dark:text-gray-300" for="logo">
