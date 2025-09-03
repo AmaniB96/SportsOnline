@@ -13,10 +13,10 @@ use Illuminate\View\View;
 class ProfileController extends Controller
 {
     public function index(){
-        $admin = User::all('id',3);
-        $user = User::all('id',1);
-        $coach = User::where('id',2);
-        return view('user',compact('admin','user','coach'));
+        $admin = User::where('role_id',3)->get();
+        $users = User::where('role_id',1)->get();
+        $coach = User::where('role_id',2)->get();
+        return view('back.user',compact('admin','users','coach'));
     }
     /**
      * Display the user's profile form.
