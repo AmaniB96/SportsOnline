@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 class JoueurController extends Controller
 {
     public function index() {
-        $joueurs = Joueur::all();
+        $joueurs = Joueur::orderBy('equipe_id','desc')->get();
         return view('back.player', compact('joueurs'));
     }
     
