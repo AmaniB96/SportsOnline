@@ -42,7 +42,7 @@
                                 <td class="p-2 border">{{ $joueur->phone }}</td>
                                 <td class="p-2 border">{{ $joueur->email }}</td>
                                 <td class="p-2 border">{{ $joueur->pays }}</td>
-                                <td class="p-2 border">{{ $joueur->position->nom }}</td>
+                                <td class="p-2 border">{{ $joueur->position->position }}</td>
                                 <td class="p-2 border">{{ $joueur->equipe->nom ?? '-' }}</td>
                                 <td class="p-2 border">{{ $joueur->genre->genre }}</td>
                                 <td class="p-2 border">{{ $joueur->user->name ?? '-' }}</td>

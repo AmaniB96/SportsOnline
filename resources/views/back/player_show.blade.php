@@ -3,14 +3,14 @@
 @section('title', "edit $joueur->nom")
 
 @section('content')
-<section class=" p-5">
+<section class="mt-10 mb-5 p-5">
     <div class="min-h-screen flex items-center justify-center m-5">
 
         <form action="{{ route('back.player.update', $joueur->id) }}" method="POST" enctype="multipart/form-data" class="bg-[rgb(31,41,55)] shadow-lg rounded-2xl p-8 w-full max-w-md space-y-6">
             @csrf
             @method('PUT')
     
-            <h2 class="text-2xl font-bold text-center text-white">Modifier le joueur</h2>
+            <h2 class="text-2xl font-bold text-center text-white">Modifier le {{ $joueur->nom }}</h2>
     
             <div>
                 <label for="nom" class="block text-sm font-medium text-white">Nom</label>
@@ -88,8 +88,8 @@
             </div>
     
             <div>
-                <label for="logo" class="block text-sm font-medium text-white">Logo</label>
-                <input type="file" id="logo" name="logo" accept="image/*"
+                <label for="image" class="block text-sm font-medium text-white">image</label>
+                <input type="file" id="image" name="image" accept="image/*"
                     class="mt-1 block w-full text-white rounded-xl border border-gray-300 p-2 focus:border-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50" />
             </div>
     
