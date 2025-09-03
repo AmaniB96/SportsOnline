@@ -48,4 +48,31 @@ class HomeController extends Controller
     public function back(){
         return view('back.home');
     }
+
+    public function joueurs(Request $request){
+    $query = Joueur::with(['equipe', 'photo', 'position', 'genre']);
+    
+    // Filtrer par genre si spécifié
+    if ($request->has('genre')) {
+        if ($request->genre == 'Masculin') {
+            $query->whereHas('genre', function($q) {
+                $q->where('genre', 'homme');
+            });
+        } elseif ($request->genre == 'Féminin') {
+            $query->whereHas('genre', function($q) {
+                $q->where('genre', 'femme');
+            });
+        }
+    }
+    
+    $joueurs = $query->get();
+    
+    return view('front.joueur', compact('joueurs'));
+}    
+
+    public function showEquipe($id)
+    {
+        $equipe = Equipe::with(['joueurs.position', 'joueurs.genre', 'joueurs.photo', 'genre', 'continent'])->findOrFail($id);
+        return view('front.show_equipe', compact('equipe'));
+    }
 }

@@ -1,0 +1,360 @@
+:root {
+    --primary: #38b6ff;
+    --secondary: #004e92;
+    --dark: #1a1a1a;
+    --light: #f5f5f5;
+    --gold: #d4af37;
+    --silver: #c0c0c0;
+    --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.joueur-container {
+    margin-top: 100px;
+}
+
+.section-title {
+    position: relative;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    text-align: center;
+    color: var(--secondary);
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 5px;
+    background: var(--gradient);
+    border-radius: 3px;
+    box-shadow: 0 2px 4px rgba(56, 182, 255, 0.3);
+}
+
+/* Filtres */
+.filters {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 30px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-toggle {
+    display: flex;
+    align-items: center;
+    background: white;
+    border: 2px solid var(--primary);
+    border-radius: 30px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: var(--secondary);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.dropdown-toggle:hover {
+    background: #f0f8ff;
+}
+
+.dropdown-toggle span {
+    margin-right: 10px;
+    font-weight: 500;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 10;
+    display: none;
+    min-width: 180px;
+    padding: 10px 0;
+    margin-top: 8px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-menu.show {
+    display: block;
+    animation: slideDown 0.3s ease;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px 20px;
+    color: var(--dark);
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f0f8ff;
+    color: var(--primary);
+}
+
+.dropdown-menu a.active {
+    background-color: var(--primary);
+    color: white;
+}
+
+/* Grille de joueurs */
+.joueurs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+/* Style FIFA Ultimate Team */
+
+.joueur-img-placeholder {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--dark);
+    border: 3px solid white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+}
+
+
+/* Message pas de résultats */
+.no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px;
+    color: #777;
+    font-style: italic;
+}
+
+/* Grilles comme dans home.css */
+.players-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 30px;
+}
+
+/* Cartes style FIFA Ultimate Team */
+.fut-card {
+    width: 250px;
+    background: linear-gradient(135deg, var(--gold), #ffd700);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    position: relative;
+    transition: transform 0.3s;
+}
+
+.fut-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+}
+
+.fut-card-female {
+    background: linear-gradient(135deg, #e87f6f, #d81b1b);
+}
+
+.fut-card-free {
+    background: linear-gradient(135deg, var(--silver), #e0e0e0);
+}
+
+.fut-card-header {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.fut-rating {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--dark);
+}
+
+.fut-position {
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--dark);
+}
+
+.equipe-link {
+    transition: transform 0.3s ease;
+}
+
+.equipe-link:hover {
+    transform: scale(1.1);
+}
+
+.fut-team-logo {
+    height: 35px;
+    width: auto;
+    border-radius: 50%;
+    background: white;
+    padding: 2px;
+    border: 2px solid white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.free-agent {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: red;
+    color: white;
+    padding: 2px 6px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+.fut-card-content {
+    padding: 0 10px 15px;
+    text-align: center;
+    position: relative;
+    height: 430px;
+}
+
+.fut-player-img {
+    width: 60%;
+    height: 160px;
+    margin: 0 auto;
+    display: block;
+    object-fit: cover;
+  
+}
+
+.player-placeholder {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--dark);
+    border: 3px solid white;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+.fut-player-name {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin: 10px 0 5px;
+    color: var(--dark);
+}
+
+.player-country {
+    color: var(--dark);
+    font-size: 0.85rem;
+    margin-bottom: 5px;
+    opacity: 0.8;
+}
+
+.player-age {
+    color: var(--dark);
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+    opacity: 0.8;
+}
+
+.player-club {
+    background: rgba(255,255,255,0.2);
+    margin: 0 auto 15px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    display: inline-block;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.club-link {
+    color: var(--dark);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+
+.club-link:hover {
+    color: var(--secondary);
+    text-decoration: underline;
+}
+
+.no-club {
+    color: red;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.fut-player-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    font-size: 0.8rem;
+}
+
+.stat {
+    color: var(--dark);
+}
+
+.stat span {
+    display: block;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+.fut-card-footer {
+    padding: 10px;
+    background: rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.btn-details {
+    background: var(--dark);
+    color: white;
+    padding: 6px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.btn-details:hover {
+    background: var(--secondary);
+    transform: translateY(-2px);
+}
+

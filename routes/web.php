@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [homeController::class, 'index'])->name('home');
 Route::get('/equipe', [HomeController::class, 'equipe'])->name('home.equipe');
+Route::get('/joueurs', [HomeController::class, 'joueurs'])->name('home.joueur');
 Route::get('/equipe/joueur/{id}', [HomeController::class, 'show'])->name('home.show');
+Route::get('/equipe/{id}', [HomeController::class, 'showEquipe'])->name('home.equipe.show');
 
 Route::get('/back', [HomeController::class, 'back'])->name('back');
 Route::resource('back/player', JoueurController::class)->names('back.player');
