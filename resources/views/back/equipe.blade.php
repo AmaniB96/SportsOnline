@@ -27,11 +27,28 @@
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
                                 </svg>
                             </a>
-                            <form action="{{ route('back.equipe.destroy',$equipe->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <a type="submit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-red-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Supprimer</a>
-                            </form>
+                            <div x-data="{ open: false }" class="inline">
+                                <button @click="open = true" class="text-red-600 hover:underline">
+                                    Supprimer
+                                </button>
+
+                                <div x-show="open" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                                    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-96">
+                                        <h2 class="text-lg font-bold mb-4 text-gray-800 dark:text-gray-200">Confirmer la suppression</h2>
+                                        <p class="mb-4 text-gray-700 dark:text-gray-300">Voulez-vous vraiment supprimer {{ $equipe->nom }} ?</p>
+                                        <div class="flex justify-end gap-2">
+                                            <button @click="open = false" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Annuler</button>
+                                            <form :action="'{{ route('back.equipe.destroy', $equipe->id) }}'" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+                                                    Supprimer
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

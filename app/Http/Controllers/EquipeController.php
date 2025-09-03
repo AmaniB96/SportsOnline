@@ -54,7 +54,7 @@ class EquipeController extends Controller
     }
     public function destroy($id){
         Equipe::findOrFail($id)->delete();
-        return redirect()->route('back.equipe.index');
+        return redirect()->back();
     }
     public function update($id,Request $request){
         

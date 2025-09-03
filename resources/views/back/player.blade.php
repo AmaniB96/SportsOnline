@@ -1,15 +1,5 @@
 @extends('layouts.back_layout')
 
-@section('title','liste des joueurs')
-
-@section('content')
-    <section>
-        <div>
-            <h1>Vous etes dans la page backJoueur</h1>
-        </div>
-        <div>
-            @extends('layouts.back_layout')
-
 @section('title', 'Liste des Joueurs')
 
 @section('content')
@@ -60,9 +50,9 @@
                                         <div x-show="open" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
                                             <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-96">
                                                 <h2 class="text-lg font-bold mb-4 text-gray-800 dark:text-gray-200">Confirmer la suppression</h2>
-                                                <p class="mb-4 text-gray-700 dark:text-gray-300">Voulez-vous vraiment supprimer ce joueur ?</p>
+                                                <p class="mb-4 text-gray-700 dark:text-gray-300">Voulez-vous vraiment supprimer {{ $joueur->nom }} {{$joueur->prenom}}</p>
                                                 <div class="flex justify-end gap-2">
-                                                    <button @click="open = false" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Annuler</button>
+                                                    <button @click="open = false" class="px-4 text-black py-2 bg-gray-300 rounded hover:bg-gray-400">Annuler</button>
                                                     <form :action="'{{ route('back.player.destroy', $joueur->id) }}'" method="POST">
                                                         @csrf
                                                         @method('DELETE')
