@@ -20,9 +20,7 @@ Route::resource('back/user',ProfileController::class)->names('back.user');
 
 Route::get('/show/{id}', [JoueurController::class, 'show'])->name('joueur.show');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
