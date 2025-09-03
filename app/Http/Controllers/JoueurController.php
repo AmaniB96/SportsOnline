@@ -33,31 +33,38 @@ class JoueurController extends Controller
             'phone' => 'required|string',
             'email' => 'required|email|unique:joueurs,email',
             'pays' => 'required|string',
+            'image' => [ 'required','image','max:2048' ]
         ]);
 
-        $joueur = new Joueur();
-        $joueur->nom = $request->nom; 
-        $joueur->prenom = $request->prenom; 
-        $joueur->age = $request->age; 
-        $joueur->phone = $request->phone; 
-        $joueur->email = $request->email; 
-        $joueur->pays = $request->pays;
-        $joueur->position_id = $request->position_id;
-        $joueur->genre_id = $request->genre_id;
-        $joueur->user_id = auth()->id();
         
-        $joueur->save();
-
-        $photo = new Photo();
-        $file = $request->file('image');
-        $filename = time().''.$file->GetClientOriginalName();
-        $path = $file->storeAs('joueurs', $filename, 'public');
-        $photo->src = $path;
-        $photo->joueur_id = $joueur->id;
         
-        $photo->save();
+        if($request->hasFile('image')){
+            $file = $request->file('image');
+            $filename = time().''.$file->getClientOriginalName();
+            $path = $file->storeAs('joueurs', $filename, 'public');
+            $pathSt = "storage/$path";
+            
+            $joueur = Joueur::create([
+                'nom' => $request->nom, 
+                'prenom' => $request->prenom, 
+                'age' => $request->age, 
+                'phone' => $request->phone, 
+                'email' => $request->email, 
+                'pays' => $request->pays,
+                'position_id' => $request->position_id,
+                'genre_id' => $request->genre_id,
+                'user_id' => auth()->id(),
+            ]);
+            Photo::create([
+                'src' => $pathSt,
+                'joueur_id' => $joueur->id
+            ]);
+        }
 
-        return redirect()->back();
+
+        
+
+        return redirect()->route('back.player.show',$joueur->id)->with('success','joueur crée');
     }
 
     public function show($id) {
@@ -86,9 +93,10 @@ class JoueurController extends Controller
 
         $photo = Photo::findOrFail($id);
         $file = $request->file('image');
-        $filename = time().''.$file->GetClientOriginalName();
+        $filename = time().''.$file->getClientOriginalName();
         $path = $file->storeAs('joueurs', $filename, 'public');
-        $photo->src = $path;
+        $pathSt = "storage/$path";
+        $photo->src = $pathSt;
         
         $photo->update();
 
@@ -97,6 +105,6 @@ class JoueurController extends Controller
 
     public function destroy($id) {
         Joueur::findOrFail($id)->delete();
-        return redirect()->back();
+        return redirect()->route('back.player.index');
     }
 }
