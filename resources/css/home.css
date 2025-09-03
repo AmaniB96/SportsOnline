@@ -260,6 +260,7 @@
         }
 
 .hero-carousel {
+        margin-top: 60px;
         margin-bottom: 3rem;
         position: relative;
     }
