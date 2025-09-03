@@ -27,7 +27,12 @@ class JoueurController extends Controller
     public function store(Request $request) {
 
         $request->validate([
-            'email' => ['unique', 'email', 'required']
+            'nom' => 'required|string|min:2',
+            'prenom' => 'required|string|min:2',
+            'age' => 'required|integer',
+            'phone' => 'required|string',
+            'email' => 'required|email|unique:joueurs,email',
+            'pays' => 'required|string',
         ]);
 
         $joueur = new Joueur();
@@ -37,6 +42,9 @@ class JoueurController extends Controller
         $joueur->phone = $request->phone; 
         $joueur->email = $request->email; 
         $joueur->pays = $request->pays;
+        $joueur->position_id = $request->position_id;
+        $joueur->genre_id = $request->genre_id;
+        $joueur->user_id = auth()->id();
         
         $joueur->save();
 
@@ -45,10 +53,11 @@ class JoueurController extends Controller
         $filename = time().''.$file->GetClientOriginalName();
         $path = $file->storeAs('joueurs', $filename, 'public');
         $photo->src = $path;
+        $photo->joueur_id = $joueur->id;
         
         $photo->save();
 
-        return redirect()->route('home');
+        return redirect()->back();
     }
 
     public function show($id) {

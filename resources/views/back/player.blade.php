@@ -3,7 +3,7 @@
 @section('title', 'Liste des Joueurs')
 
 @section('content')
-    <section class="m-5">
+    <section class="ms-5 mt-20 mb-5">
         <div>
             <a href="{{ route('back.player.create') }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 Crée un nouveau joueur
@@ -20,6 +20,7 @@
                 <table class="w-full border-collapse text-gray-700 dark:text-gray-200">
                     <thead>
                         <tr class="bg-gray-200 dark:bg-gray-700 text-left">
+                            <th class="p-2 border">image</th>
                             <th class="p-2 border">Nom</th>
                             <th class="p-2 border">Prénom</th>
                             <th class="p-2 border">Âge</th>
@@ -35,14 +36,15 @@
                     </thead>
                     <tbody>
                         @foreach($joueurs as $joueur)
-                            <tr class="border-b hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <tr class="border-b hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <td class="p-2 border"><img src="{{ asset($joueur->photo->src)}}" alt="{{ $joueur->nom }}"></td>
                                 <td class="p-2 border">{{ $joueur->nom }}</td>
                                 <td class="p-2 border">{{ $joueur->prenom }}</td>
                                 <td class="p-2 border">{{ $joueur->age }}</td>
                                 <td class="p-2 border">{{ $joueur->phone }}</td>
                                 <td class="p-2 border">{{ $joueur->email }}</td>
                                 <td class="p-2 border">{{ $joueur->pays }}</td>
-                                <td class="p-2 border">{{ $joueur->position->nom }}</td>
+                                <td class="p-2 border">{{ $joueur->position->position }}</td>
                                 <td class="p-2 border">{{ $joueur->equipe->nom ?? '-' }}</td>
                                 <td class="p-2 border">{{ $joueur->genre->genre }}</td>
                                 <td class="p-2 border">{{ $joueur->user->name ?? '-' }}</td>
