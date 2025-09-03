@@ -52,20 +52,17 @@
                                 <td class="p-2 border">
                                     <a href="{{ route('back.player.show', $joueur->id) }}" class="text-blue-600 dark:text-blue-400 hover:underline">Modifier</a>
                                     |
-                                    <!-- Button supprimer -->
                                     <div x-data="{ open: false }" class="inline">
                                         <button @click="open = true" class="text-red-600 hover:underline">
                                             Supprimer
                                         </button>
 
-                                        <!-- Modal -->
                                         <div x-show="open" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
                                             <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-96">
                                                 <h2 class="text-lg font-bold mb-4 text-gray-800 dark:text-gray-200">Confirmer la suppression</h2>
                                                 <p class="mb-4 text-gray-700 dark:text-gray-300">Voulez-vous vraiment supprimer ce joueur ?</p>
                                                 <div class="flex justify-end gap-2">
                                                     <button @click="open = false" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Annuler</button>
-                                                    
                                                     <form :action="'{{ route('back.player.destroy', $joueur->id) }}'" method="POST">
                                                         @csrf
                                                         @method('DELETE')
@@ -77,7 +74,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </td>
                             </tr>
                         @endforeach

@@ -83,11 +83,11 @@ class JoueurController extends Controller
         
         $photo->update();
 
-        return redirect()->route('home');
+        return redirect()->route('back.player.show');
     }
 
     public function destroy($id) {
         Joueur::findOrFail($id)->delete();
-        return redirect()->route('home');
+        return redirect()->back();
     }
 }
