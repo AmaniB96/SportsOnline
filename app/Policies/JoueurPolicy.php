@@ -21,17 +21,16 @@ class JoueurPolicy
      */
     public function view(User $user, Joueur $joueur): bool
     {
-        if ($user->role === 'admin') {
+        if ($user->role && $user->role->nom === 'admin') {
             return true;
         }
 
-        if ($user->role === 'user') {
+        if ($user->role && $user->role->nom === 'user') {
             return $joueur->user_id === $user->id;
         }
 
-        if ($user->role === 'coach') {
-            return $joueur->user_id === $user->id 
-                || ($joueur->user && $joueur->user->role === 'user');
+        if ($user->role && $user->role->nom === 'coach') {
+            return $joueur->user_id === $user->id || ($joueur->user && $joueur->user->role->name === 'user');
         }
 
         return false;
@@ -49,17 +48,16 @@ class JoueurPolicy
      */
     public function update(User $user, Joueur $joueur): bool
     {
-        if ($user->role === 'admin') {
+       if ($user->role && $user->role->nom === 'admin') {
             return true;
         }
 
-        if ($user->role === 'user') {
+        if ($user->role && $user->role->nom === 'user') {
             return $joueur->user_id === $user->id;
         }
 
-        if ($user->role === 'coach') {
-            return $joueur->user_id === $user->id 
-                || ($joueur->user && $joueur->user->role === 'user');
+        if ($user->role && $user->role->nom === 'coach') {
+            return $joueur->user_id === $user->id || ($joueur->user && $joueur->user->role->name === 'user');
         }
 
         return false;
@@ -70,16 +68,16 @@ class JoueurPolicy
      */
     public function delete(User $user, Joueur $joueur): bool
     {
-        if ($user->role === 'admin') {
+        if ($user->role && $user->role->nom === 'admin') {
             return true;
         }
 
-        if ($user->role === 'user') {
+        if ($user->role && $user->role->nom === 'user') {
             return $joueur->user_id === $user->id;
         }
 
-        if ($user->role === 'coach') {
-            return $joueur->user_id === $user->id || ($joueur->user && $joueur->user->role === 'user');
+        if ($user->role && $user->role->nom === 'coach') {
+            return $joueur->user_id === $user->id || ($joueur->user && $joueur->user->role->name === 'user');
         }
 
         return false;
