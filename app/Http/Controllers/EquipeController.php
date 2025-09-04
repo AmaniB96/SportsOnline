@@ -10,9 +10,9 @@ use Illuminate\Http\Request;
 class EquipeController extends Controller
 {
     public function index(){
-        $mesEquipe = Equipe::where('user_id',auth()->id())->get();
+        $mesEquipes = Equipe::where('user_id',auth()->id())->get();
         $equipes = Equipe::all();
-        return view('back.equipe',compact('equipes','mesEquipe'));
+        return view('back.equipe',compact('equipes','mesEquipes'));
     }
     public function show($id){
         $equipe = equipe::findOrFail($id);
@@ -47,6 +47,7 @@ class EquipeController extends Controller
             'ville'=>request('ville'),
             'continent_id'=>request('continent_id'),
             'genre_id'=>request('genre_id'),
+            'user_id'=>auth()->id(),
             'logo'=>$pathSt,
         ]);
 

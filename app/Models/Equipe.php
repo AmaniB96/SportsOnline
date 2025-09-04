@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Equipe extends Model
 {
-    protected $fillable = ['nom','ville','continent_id','genre_id','logo'];
+    protected $fillable = ['nom','ville','continent_id','genre_id','logo','user_id'];
     public function genre(){
         return $this->belongsTo(Genre::class);
     }
@@ -17,5 +17,8 @@ class Equipe extends Model
     
     public function joueurs() {
         return $this->hasMany(Joueur::class);
+    }
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 }

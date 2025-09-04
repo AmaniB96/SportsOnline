@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('continent_id')->constrained('continents');
             $table->foreignId('genre_id')->nullable()->constrained('genres')->nullOnDelete();
             $table->string('logo');
+            $table->foreignId("user_id")->nullable()->constrained('users');
             $table->timestamps();
         });
     }
