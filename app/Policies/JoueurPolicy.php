@@ -72,7 +72,7 @@ class JoueurPolicy
         }
 
         if ($user->role && $user->role->nom === 'coach') {
-            return $joueur->user_id === $user->id || ($joueur->user && $joueur->user->role->name === 'user');
+            return $joueur->user_id === $user->id || ($joueur->user && $joueur->user->role->nom === 'user');
         }
 
         return false;
