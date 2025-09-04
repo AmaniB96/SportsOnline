@@ -6,6 +6,7 @@ use App\Http\Controllers\EquipeController;
 use App\Http\Controllers\JoueurController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
+use App\Http\Middleware\AdminVerfi;
 use App\Http\Middleware\ConnecterVerif;
 use Illuminate\Support\Facades\Route;
 
@@ -16,12 +17,11 @@ Route::get('/equipe/joueur/{id}', [HomeController::class, 'show'])->name('home.s
 Route::get('/equipe/{id}', [HomeController::class, 'showEquipe'])->name('home.equipe.show');
 
 // Route::get('/back', [HomeController::class, 'back'])->name('back');
-Route::resource('back/player', JoueurController::class)->names('back.player');
-Route::resource('back/equipe', EquipeController::class)->names('back.equipe');
-Route::resource('back/user',ProfileController::class)->names('back.user');
+Route::resource('back/player', JoueurController::class)->middleware(ConnecterVerif::class)->names('back.player');
+Route::resource('back/equipe', EquipeController::class)->middleware(ConnecterVerif::class)->names('back.equipe');
+Route::resource('back/user',ProfileController::class)->middleware(ConnecterVerif::class)->names('back.user');
 
-Route::put("back/user/index",[RoleController::class,'index'])->name('back.use.index');
-Route::put("back/role/update/{id}",[RoleController::class,'update'])->name('back.role.update');
+Route::put("back/role/update/{id}",[RoleController::class,'update'])->middleware(AdminVerfi::class)->name('back.role.update');
 
 
 Route::get('/show/{id}', [JoueurController::class, 'show'])->name('joueur.show');
