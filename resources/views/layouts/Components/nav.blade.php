@@ -26,7 +26,7 @@
           </div>
           <div class="flex space-x-4">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-white/5 hover:text-white" -->
-            <a href="{{ route('back') }}" aria-current="page" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white">back</a>
+            {{-- <a href="{{ route('back') }}" aria-current="page" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white">back</a> --}}
             <a href="{{ route('back.player.index') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">joueur</a>
             <a href="{{ route('back.equipe.index') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">equipe</a>
             <a href="{{ route('back.user.index') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">user</a>
