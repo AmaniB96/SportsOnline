@@ -87,7 +87,7 @@
             @endif
         </div>
     </section>
-    {{-- @can('isAdminorCoach') --}}
+    @can('isAdminorCoach')
         <section class="m-10 p-6 bg-white rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
             <div class="bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 p-4 w-fit">
                 <h1 class="text-xl font-bold mb-4 text-gray-700 dark:text-gray-200">Liste des Joueurs</h1>
@@ -177,6 +177,6 @@
             </div>
         </section>
         
-    {{-- @endcan --}}
+    @endcan
 
 @endsection
