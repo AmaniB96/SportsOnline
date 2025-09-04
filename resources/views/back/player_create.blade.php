@@ -7,6 +7,18 @@
     
     <section class="mt-10 mb-5 p-5">
         <div>
+            @if(session('success'))
+                <div class="bg-green-600 text-white p-3 rounded mb-4">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            @if(session('error'))
+                <div class="bg-red-600 text-white p-3 rounded mb-4">
+                    {{ session('error') }}
+                </div>
+            @endif
+
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -74,8 +86,15 @@
                             class="mt-1 block w-full rounded-xl border text-black border-gray-300 p-3 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50 text-black">
                             <option value="">-- Sélectionner --</option>
                             @foreach($equipes as $equipe)
+                                @php
+                                    $count = $equipe->joueurs->count();
+                                    $isFull = $count >= 15;
+                                    $label = ucfirst($equipe->nom) . ' (' . $count . '/15)' . ($isFull ? ' — Pleine' : '');
+                                @endphp
                                 <option class="text-black" value="{{ $equipe->id }}" @selected(old('equipe_id') == $equipe->id)>
-                                    {{ ucfirst($equipe->nom) }}
+                                    @selected(old('equipe_id') == $equipe->id)
+                                    @if($isFull) disabled @endif>
+                                    {{ $label }}
                                 </option>
                             @endforeach
                         </select>

@@ -40,10 +40,14 @@
             Vos Joueurs
           </a>
 
+          @can('isAdminorCoach')
+          
           <a href="{{ route('back.equipe.index') }}" 
              class="rounded-md px-3 py-2 text-sm font-medium {{ request()->routeIs('back.equipe*') ? 'bg-secondary text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}">
             Vos Équipes
           </a>
+          @endcan
+
 
           @can('isAdmin')
           
