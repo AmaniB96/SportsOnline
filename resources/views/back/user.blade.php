@@ -22,7 +22,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($users as $user)
+                        @foreach($admin as $user)
                             <tr class="border-b hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <td class="p-2 border">{{ $user->nom }}</td>
                                 <td class="p-2 border">{{ $user->prenom }}</td>
@@ -45,7 +45,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($users as $user)
+                        @foreach($coach as $user)
                             <tr class="border-b hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <td class="p-2 border">{{ $user->nom }}</td>
                                 <td class="p-2 border">{{ $user->prenom }}</td>

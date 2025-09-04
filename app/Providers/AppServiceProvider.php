@@ -20,6 +20,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Gate::define("isNotAdmin", function ($user) {
+            return $user->role_id != 3;
+        });
         Gate::define("isAdmin", function ($user) {
             return $user->role_id == 3;
         });

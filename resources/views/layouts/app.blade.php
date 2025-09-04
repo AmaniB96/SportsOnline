@@ -10,7 +10,7 @@
     {{-- Inclusion de ta nav personnalisée --}}
     @include('layouts.Components.nav')
 
-    <div class="min-h-screen bg-gray-100 mt-32 ms-10 me-10">
+    <div class="min-h-screen bg-gray-100 pt-20 ps-10 pe-10">
         {{-- Contenu des pages --}}
         @yield('content')
     </div>
