@@ -8,27 +8,16 @@ use App\Models\Genre;
 use App\Models\Joueur;
 use App\Models\Photo;
 use Illuminate\Http\Request;
-<<<<<<< HEAD
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
-=======
 use Illuminate\Validation\Rule;
->>>>>>> 3d4a0b2 (ça avance)
 
 class JoueurController extends Controller
 {
     public function index() {
         $joueurs = Joueur::orderBy('equipe_id','desc')->get();
         $mesJoueurs = Joueur::where('user_id', auth()->id())->get();
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> fc53862 (je mets des test et des machin)
 
-=======
-        
->>>>>>> 3d4a0b2 (ça avance)
         $joueursAvecUser = Joueur::with('user')->get();
 
         $joueursParRoleEtUser = $joueursAvecUser->groupBy(function($joueur) {
@@ -45,28 +34,8 @@ class JoueurController extends Controller
         $joueursUser = $joueursParRoleEtUser->get('user', collect());
 
         $joueursCoach = $joueursParRoleEtUser->get('coach', collect());
-<<<<<<< HEAD
 
         return view('back.player', compact('joueurs', 'mesJoueurs', 'joueursUser', 'joueursCoach', 'joueursParTypeEtUser'));
-<<<<<<< HEAD
-=======
-        $joueursUser = Joueur::whereHas('user', function ($query) {
-            $query->where('role_id', 1);
-        })->get();
-        $joueursCoach = Joueur::whereHas('user', function ($query) {
-            $query->where('role_id', 2);
-        })->get();
-<<<<<<< HEAD
-        return view('back.player', compact('joueurs','joueursUser','mesJoueur'));
->>>>>>> 830e074 (var pour les user afficher)
-=======
-        return view('back.player', compact('joueurs','joueursUser','mesJoueur','joueursCoach'));
->>>>>>> 0661d39 (var ok pour joueur)
-=======
->>>>>>> fc53862 (je mets des test et des machin)
-=======
-        return view('back.player', compact('joueurs', 'mesJoueurs', 'joueursUser', 'joueursCoach', 'joueursParRoleEtUser','joueursUser','joueursCoach'));
->>>>>>> 3d4a0b2 (ça avance)
     }
 
     
@@ -167,7 +136,6 @@ class JoueurController extends Controller
         return view('back.player_show', compact('joueur', 'genres', 'equipes', 'positions'));
     }
 
-<<<<<<< HEAD
     public function update(Request $request, $id)
     {
         $joueur = Joueur::findOrFail($id);
@@ -240,7 +208,7 @@ class JoueurController extends Controller
             DB::rollBack();
             return back()->withInput()->with('error', 'Erreur serveur. Réessayez.');
         }
-=======
+
     public function update(Request $request, $id) {
         
         $request->validate([
@@ -277,8 +245,7 @@ class JoueurController extends Controller
             $photo->update();
         }
 
-        return redirect()->route('back.player.show',$joueur->id);
->>>>>>> 3d4a0b2 (ça avance)
+        return redirect()->route('back.player.show');
     }
 
     public function destroy($id) {
