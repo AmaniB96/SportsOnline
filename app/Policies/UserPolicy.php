@@ -47,6 +47,21 @@ class UserPolicy
      */
     public function delete(User $user, User $model): bool
     {
+        if (! $user->role) {
+            return false;
+        }
+
+        // Admin : autorisé
+        if ($user->role->nom === 'admin') {
+            return true;
+        }
+
+        // Sinon : seulement suppression de son propre compte
+        if ($user->id === $model->id) {
+            return true;
+        }
+
+        // Dans tous les autres cas, explicitement false
         return false;
     }
 

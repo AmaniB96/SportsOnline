@@ -51,21 +51,33 @@ class ProfileController extends Controller
     /**
      * Delete the user's account.
      */
-    public function destroy(Request $request): RedirectResponse
+    public function destroy(Request $request, User $user): RedirectResponse
     {
-        $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current_password'],
-        ]);
+        // Cas 1 : l'utilisateur supprime son propre compte
+        if ($request->user()->id === $user->id) {
+            $request->validateWithBag('userDeletion', [
+                'password' => ['required', 'current_password'],
+            ]);
 
-        $user = $request->user();
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
 
-        Auth::logout();
+            $user->delete();
 
-        $user->delete();
+            return Redirect::to('/');
+        } 
+        
+        // Cas 2 : un admin supprime un autre utilisateur
+        if ($this->authorize('delete', $user)) {
+            $user->delete();
 
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+            return Redirect::route('back.user.index')
+                ->with('success', 'Utilisateur supprimé avec succès.');
+        }
 
-        return Redirect::to('/');
+        // Cas 3 : ni admin ni propriétaire du compte → refus
+        abort(403, 'Action non autorisée.');
     }
+
 }
