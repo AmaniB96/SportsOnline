@@ -15,9 +15,12 @@ class JoueurController extends Controller
         $joueurs = Joueur::orderBy('equipe_id','desc')->get();
         $mesJoueurs = Joueur::where('user_id', auth()->id())->get();
         $joueursUser = Joueur::whereHas('user', function ($query) {
+            $query->where('role_id', 1);
+        })->get();
+        $joueursCoach = Joueur::whereHas('user', function ($query) {
             $query->where('role_id', 2);
         })->get();
-        return view('back.player', compact('joueurs','joueursUser','mesJoueur'));
+        return view('back.player', compact('joueurs','joueursUser','mesJoueur','joueursCoach'));
     }
     
     public function create() {
