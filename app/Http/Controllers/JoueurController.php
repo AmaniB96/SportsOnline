@@ -16,29 +16,22 @@ class JoueurController extends Controller
 {
     public function index()
     {
-        // Eager-load avec la bonne relation : 'user.role' (singulier)
         $allJoueurs = Joueur::with(['photo', 'equipe', 'position', 'genre', 'user.role'])->get();
 
-        // 1. Récupérer les joueurs de l'utilisateur connecté
         $mesJoueurs = $allJoueurs->where('user_id', auth()->id());
 
-        // 2. Créer la variable manquante en groupant les autres joueurs
         $joueursParRoleEtUser = $allJoueurs
-            ->where('user_id', '!=', auth()->id()) // Exclure les joueurs de l'utilisateur connecté
+            ->where('user_id', '!=', auth()->id())
             ->groupBy(function ($joueur) {
-                // Groupe principal : par nom du rôle de l'utilisateur associé
-                // Utilise la relation 'role' (singulier) et accède à la propriété 'role' (ou 'name' si c'est le nom de ta colonne)
                 if (!$joueur->user || !$joueur->user->role) {
-                    return 'sans_role'; // Cas où le joueur n'a pas d'utilisateur ou l'utilisateur n'a pas de rôle
+                    return 'sans_role'; 
                 }
-                return strtolower($joueur->user->role->role ?? 'user'); // Accède au nom du rôle
+                return strtolower($joueur->user->role->role ?? 'user'); 
             })
             ->map(function ($joueursByRole) {
-                // Sous-groupe : par ID de l'utilisateur
                 return $joueursByRole->groupBy('user_id');
             });
 
-        // 3. Passer toutes les variables à la vue
         return view('back.player', compact('mesJoueurs', 'joueursParRoleEtUser'));
     }
 

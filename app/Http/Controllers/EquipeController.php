@@ -22,6 +22,7 @@ class EquipeController extends Controller
     public function create(){
         $genres = Genre::all();
         $continents = Continent::all();
+        $this->authorize('create', Equipe::class);
         return view('back.equipe_create',compact('genres','continents'));
     }
     public function store(){
