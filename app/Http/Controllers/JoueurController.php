@@ -38,10 +38,17 @@ class JoueurController extends Controller
         return view('back.player', compact('joueurs', 'mesJoueurs', 'joueursUser', 'joueursCoach', 'joueursParTypeEtUser'));
 =======
         $joueursUser = Joueur::whereHas('user', function ($query) {
+            $query->where('role_id', 1);
+        })->get();
+        $joueursCoach = Joueur::whereHas('user', function ($query) {
             $query->where('role_id', 2);
         })->get();
+<<<<<<< HEAD
         return view('back.player', compact('joueurs','joueursUser','mesJoueur'));
 >>>>>>> 830e074 (var pour les user afficher)
+=======
+        return view('back.player', compact('joueurs','joueursUser','mesJoueur','joueursCoach'));
+>>>>>>> 0661d39 (var ok pour joueur)
     }
 
     
