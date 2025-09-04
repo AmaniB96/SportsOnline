@@ -36,16 +36,24 @@
                     <tbody>
                         @foreach($mesJoueurs as $joueur)
                         <tr class="border-b hover:bg-gray-100 dark:hover:bg-gray-700">
-                                <td class="p-2 border"><img src="{{ asset($joueur->photo->src)}}" alt="{{ $joueur->nom }}"></td>
+                                <td class="p-2 border">
+                                    @if(optional($joueur->photo)->src)
+                                        <img src="{{ asset($joueur->photo->src) }}" alt="{{ $joueur->nom }}" class="h-12 w-12 object-cover rounded" />
+                                    @else
+                                        <div class="h-12 w-12 bg-gray-200 rounded flex items-center justify-center text-sm text-gray-600">
+                                            {{ strtoupper(substr($joueur->prenom ?? $joueur->nom, 0, 1)) }}
+                                        </div>
+                                    @endif
+                                </td>
                                 <td class="p-2 border">{{ $joueur->nom }}</td>
                                 <td class="p-2 border">{{ $joueur->prenom }}</td>
                                 <td class="p-2 border">{{ $joueur->age }}</td>
                                 <td class="p-2 border">{{ $joueur->phone }}</td>
                                 <td class="p-2 border">{{ $joueur->email }}</td>
                                 <td class="p-2 border">{{ $joueur->pays }}</td>
-                                <td class="p-2 border">{{ $joueur->position->position }}</td>
+                                <td class="p-2 border">{{ optional($joueur->position)->position ?? '-' }}</td>
                                 <td class="p-2 border">{{ $joueur->equipe->nom ?? '-' }}</td>
-                                <td class="p-2 border">{{ $joueur->genre->genre }}</td>
+                                <td class="p-2 border">{{ optional($joueur->genre)->genre ?? '-' }}</td>
                                 <td class="p-2 border">
                                     <a href="{{ route('back.player.show', $joueur->id) }}" class="text-blue-600 dark:text-blue-400 hover:underline">Modifier</a>
                                     |
@@ -119,17 +127,25 @@
                                 <tbody>
                                     @foreach($joueurs as $joueur)
                                         <tr class="border-b hover:bg-gray-100 dark:hover:bg-gray-700">
-                                            <td class="p-2 border"><img src="{{ asset($joueur->photo->src)}}" alt="{{ $joueur->nom }}"></td>
+                                            <td class="p-2 border">
+                                                @if(optional($joueur->photo)->src)
+                                                    <img src="{{ asset($joueur->photo->src) }}" alt="{{ $joueur->nom }}" class="h-12 w-12 object-cover rounded" />
+                                                @else
+                                                    <div class="h-12 w-12 bg-gray-200 rounded flex items-center justify-center text-sm text-gray-600">
+                                                        {{ strtoupper(substr($joueur->prenom ?? $joueur->nom, 0, 1)) }}
+                                                    </div>
+                                                @endif
+                                            </td>
                                             <td class="p-2 border">{{ $joueur->nom }}</td>
                                             <td class="p-2 border">{{ $joueur->prenom }}</td>
                                             <td class="p-2 border">{{ $joueur->age }}</td>
                                             <td class="p-2 border">{{ $joueur->phone }}</td>
                                             <td class="p-2 border">{{ $joueur->email }}</td>
                                             <td class="p-2 border">{{ $joueur->pays }}</td>
-                                            <td class="p-2 border">{{ $joueur->position->position }}</td>
+                                            <td class="p-2 border">{{ optional($joueur->position)->position ?? '-' }}</td>
                                             <td class="p-2 border">{{ $joueur->equipe->nom ?? '-' }}</td>
-                                            <td class="p-2 border">{{ $joueur->genre->genre }}</td>
-                                            <td class="p-2 border">{{ $joueur->user? $joueur->user->nom.' '.$joueur->user->prenom : '-' }}</td>
+                                            <td class="p-2 border">{{ optional($joueur->genre)->genre ?? '-' }}</td>
+                                            <td class="p-2 border">{{ $joueur->user ? ($joueur->user->nom.' '.$joueur->user->prenom) : '-' }}</td>
                                             <td class="p-2 border">
                                                 <a href="{{ route('back.player.show', $joueur->id) }}" class="text-blue-600 dark:text-blue-400 hover:underline">Modifier</a>
                                                 |
