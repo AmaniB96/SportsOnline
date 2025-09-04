@@ -240,3 +240,19 @@
         font-size: 1.4rem;
     }
 }
+
+.badge-full {
+    display: inline-block;
+    background-color: #c0392b; /* rouge */
+    color: #fff;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    margin-left: 0.5rem;
+}
+
+/* Optionnel : style léger pour la carte d'équipe pleine */
+.equipe-pleine {
+    box-shadow: 0 4px 14px rgba(192,57,43,0.08);
+    border-left: 4px solid #c0392b;
+}

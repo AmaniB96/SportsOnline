@@ -8,6 +8,8 @@ use App\Models\Genre;
 use App\Models\Joueur;
 use App\Models\Photo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 
 class JoueurController extends Controller
 {
@@ -24,8 +26,8 @@ class JoueurController extends Controller
         return view('back.player_create', compact('joueurs', 'genres', 'equipes', 'positions'));
     }
 
-    public function store(Request $request) {
-
+    public function store(Request $request)
+    {
         $request->validate([
             'nom' => 'required|string|min:2',
             'prenom' => 'required|string|min:2',
@@ -33,38 +35,74 @@ class JoueurController extends Controller
             'phone' => 'required|string',
             'email' => 'required|email|unique:joueurs,email',
             'pays' => 'required|string',
-            'image' => [ 'required','image','max:2048' ]
+            'position_id' => 'required|exists:positions,id',
+            'equipe_id' => 'nullable|integer|exists:equipes,id',
+            'genre_id' => 'required|integer|exists:genres,id',
+            'image' => ['nullable','image','max:2048']
         ]);
 
-        
-        
-        if($request->hasFile('image')){
-            $file = $request->file('image');
-            $filename = time().''.$file->getClientOriginalName();
-            $path = $file->storeAs('joueurs', $filename, 'public');
-            $pathSt = "storage/$path";
-            
+        DB::beginTransaction();
+        try {
+            // si équipe sélectionnée -> lock et vérifications
+            if ($request->equipe_id) {
+                $equipe = Equipe::where('id', $request->equipe_id)->lockForUpdate()->first();
+                if (! $equipe) {
+                    DB::rollBack();
+                    return back()->withInput()->with('error', 'Équipe introuvable.');
+                }
+
+                $equipeGenreStr = strtolower($equipe->genre->genre ?? 'mixte');
+                $selectedGenreStr = strtolower(Genre::find($request->genre_id)->genre ?? '');
+
+                // compatibilité genre (autorise mixte)
+                if ($equipeGenreStr !== 'mixte' && $selectedGenreStr !== $equipeGenreStr) {
+                    DB::rollBack();
+                    return back()->withInput()->with('error', 'Genre incompatible avec l\'équipe sélectionnée.');
+                }
+
+                // capacité totale
+                if ($equipe->joueurs()->count() >= 15) {
+                    DB::rollBack();
+                    return back()->withInput()->with('error', 'L\'équipe est pleine (15 joueurs).');
+                }
+
+                // limite par poste
+                if ($equipe->joueurs()->where('position_id', $request->position_id)->count() >= 4) {
+                    DB::rollBack();
+                    return back()->withInput()->with('error', 'Limite atteinte pour ce poste (4 joueurs).');
+                }
+            }
+
+            // création du joueur
             $joueur = Joueur::create([
-                'nom' => $request->nom, 
-                'prenom' => $request->prenom, 
-                'age' => $request->age, 
-                'phone' => $request->phone, 
-                'email' => $request->email, 
+                'nom' => $request->nom,
+                'prenom' => $request->prenom,
+                'age' => $request->age,
+                'phone' => $request->phone,
+                'email' => $request->email,
                 'pays' => $request->pays,
                 'position_id' => $request->position_id,
                 'genre_id' => $request->genre_id,
                 'user_id' => auth()->id(),
+                'equipe_id' => $request->equipe_id ?? null,
             ]);
-            Photo::create([
-                'src' => $pathSt,
-                'joueur_id' => $joueur->id
-            ]);
+
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                $filename = time().'_'.$file->getClientOriginalName();
+                $path = $file->storeAs('joueurs', $filename, 'public');
+                Photo::create([
+                    'src' => "storage/{$path}",
+                    'joueur_id' => $joueur->id
+                ]);
+            }
+
+            DB::commit();
+            return redirect()->route('back.player.index')->with('success', 'Joueur créé avec succès.');
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            return back()->withInput()->with('error', 'Erreur serveur. Réessayez.');
         }
-
-
-        
-
-        return redirect()->route('back.player.show',$joueur->id)->with('success','joueur crée');
     }
 
     public function show($id) {
@@ -75,32 +113,78 @@ class JoueurController extends Controller
         return view('back.player_show', compact('joueur', 'genres', 'equipes', 'positions'));
     }
 
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
+        $joueur = Joueur::findOrFail($id);
 
         $request->validate([
-            'email' => ['unique', 'email', 'required']
+            'nom' => 'required|string|min:2',
+            'prenom' => 'required|string|min:2',
+            'age' => 'required|integer',
+            'phone' => 'required|string',
+            'email' => ['required','email', 'unique:joueurs,email,'.$joueur->id],
+            'pays' => 'required|string',
+            'position_id' => 'required|exists:positions,id',
+            'equipe_id' => 'nullable|integer|exists:equipes,id',
+            'genre_id' => 'required|integer|exists:genres,id',
+            'image' => ['nullable','image','max:2048']
         ]);
 
-        $joueur = Joueur::findOrFail($id);
-        $joueur->nom = $request->nom; 
-        $joueur->prenom = $request->prenom; 
-        $joueur->age = $request->age; 
-        $joueur->phone = $request->phone; 
-        $joueur->email = $request->email; 
-        $joueur->pays = $request->pays;
-        
-        $joueur->update();
+        DB::beginTransaction();
+        try {
+            if ($request->equipe_id) {
+                $equipe = Equipe::where('id', $request->equipe_id)->lockForUpdate()->first();
+                if (! $equipe) {
+                    DB::rollBack();
+                    return back()->withInput()->with('error', 'Équipe introuvable.');
+                }
 
-        $photo = Photo::findOrFail($id);
-        $file = $request->file('image');
-        $filename = time().''.$file->getClientOriginalName();
-        $path = $file->storeAs('joueurs', $filename, 'public');
-        $pathSt = "storage/$path";
-        $photo->src = $pathSt;
-        
-        $photo->update();
+                $equipeGenreStr = strtolower($equipe->genre->genre ?? 'mixte');
+                $selectedGenreStr = strtolower(Genre::find($request->genre_id)->genre ?? '');
 
-        return redirect()->route('back.player.show');
+                if ($equipeGenreStr !== 'mixte' && $selectedGenreStr !== $equipeGenreStr) {
+                    DB::rollBack();
+                    return back()->withInput()->with('error', 'Genre incompatible avec l\'équipe sélectionnée.');
+                }
+
+                if ($equipe->joueurs()->where('id', '!=', $joueur->id)->count() >= 15) {
+                    DB::rollBack();
+                    return back()->withInput()->with('error', 'L\'équipe est pleine (15 joueurs).');
+                }
+
+                if ($equipe->joueurs()->where('position_id', $request->position_id)->where('id', '!=', $joueur->id)->count() >= 4) {
+                    DB::rollBack();
+                    return back()->withInput()->with('error', 'Limite atteinte pour ce poste (4 joueurs).');
+                }
+            }
+
+            $joueur->update([
+                'nom' => $request->nom,
+                'prenom' => $request->prenom,
+                'age' => $request->age,
+                'phone' => $request->phone,
+                'email' => $request->email,
+                'pays' => $request->pays,
+                'position_id' => $request->position_id,
+                'genre_id' => $request->genre_id,
+                'equipe_id' => $request->equipe_id ?? null,
+            ]);
+
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                $filename = time().'_'.$file->getClientOriginalName();
+                $path = $file->storeAs('joueurs', $filename, 'public');
+                $photo = Photo::firstOrNew(['joueur_id' => $joueur->id]);
+                $photo->src = "storage/{$path}";
+                $photo->save();
+            }
+
+            DB::commit();
+            return redirect()->route('back.player.index')->with('success', 'Joueur mis à jour.');
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            return back()->withInput()->with('error', 'Erreur serveur. Réessayez.');
+        }
     }
 
     public function destroy($id) {
