@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Equipe;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -18,6 +19,7 @@ class ProfileController extends Controller
         $users = User::where('role_id',1)->get();
         $coach = User::where('role_id',2)->get();
         $roles = Role::all();
+        $this->authorize('view', User::class);
         return view('back.user',compact('admin','users','coach','roles'));
     }
     /**

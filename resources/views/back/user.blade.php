@@ -71,6 +71,11 @@
                                     </select>
                                     <button type="submit" class="bg-blue-500 text-white px-2 py-1 rounded">Modifier</button>
                                 </form>
+                                <form action="{{ route('back.user.destroy',$user->id) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit">Supprimer</button>
+                                </form>
                             </td>
                         </tr>
                         @endforeach
