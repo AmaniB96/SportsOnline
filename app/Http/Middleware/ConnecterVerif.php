@@ -15,8 +15,8 @@ class ConnecterVerif
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!$request->user) {
-            return redirect(route('home'))->with('notAcces','acces refuser');
+        if (!$request->user()) {
+            return redirect()->route('home')->with('notAcces','acces refuser');
         } else {
             return $next($request);
         }
