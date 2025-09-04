@@ -17,6 +17,9 @@ class JoueurController extends Controller
         $joueurs = Joueur::orderBy('equipe_id','desc')->get();
         $mesJoueurs = Joueur::where('user_id', auth()->id())->get();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> fc53862 (je mets des test et des machin)
 
         $joueursAvecUser = Joueur::with('user')->get();
 
@@ -36,6 +39,7 @@ class JoueurController extends Controller
         $joueursCoach = $joueursParRoleEtUser->get('coach', collect());
 
         return view('back.player', compact('joueurs', 'mesJoueurs', 'joueursUser', 'joueursCoach', 'joueursParTypeEtUser'));
+<<<<<<< HEAD
 =======
         $joueursUser = Joueur::whereHas('user', function ($query) {
             $query->where('role_id', 1);
@@ -49,6 +53,8 @@ class JoueurController extends Controller
 =======
         return view('back.player', compact('joueurs','joueursUser','mesJoueur','joueursCoach'));
 >>>>>>> 0661d39 (var ok pour joueur)
+=======
+>>>>>>> fc53862 (je mets des test et des machin)
     }
 
     
