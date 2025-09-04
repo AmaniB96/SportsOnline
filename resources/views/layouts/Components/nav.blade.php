@@ -76,7 +76,7 @@
             
             <el-menu anchor="top end" popover class="w-48 mt-2 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5">
               @auth
-                {{-- <a href="{{ route('profile.show') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Votre profil</a> --}}
+                <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Votre profil</a>
                 <a href="{{ route('logout') }}"
                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
@@ -89,6 +89,13 @@
               @endauth
             </el-menu>
           </el-dropdown>
+          <div>
+            @auth
+              <div class="hidden md:block ml-4 text-right">
+                <p class="text-sm font-medium text-white">{{ auth()->user()->role->nom }}</p>
+              </div>
+            @endauth
+          </div>
         </div>
       </div>
 
