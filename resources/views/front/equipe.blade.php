@@ -10,13 +10,20 @@
             <div class="equipes">
                 @if($equipes->count())
                     @foreach($equipes as $equipe)
-                        <div class="equipe-card">
+                        @php
+                            $count = $equipe->joueurs->count();
+                            $isFull = $count >= 15;
+                        @endphp
+                        <div class="equipe-card {{ $isFull ? 'equipe-pleine' : '' }}">
                             <div class="card-header">
                                 <div class="header-content">
                                     <h2>{{ $equipe->nom }}</h2>
                                     <div class="equipe-details">
                                         <span class="badge">Genre: {{ $equipe->genre->genre ?? 'Non spécifié' }}</span>
-                                        <span class="badge">{{ $equipe->joueurs->count() }} joueurs</span>
+                                        <span class="badge">{{ $count }} joueurs</span>
+                                        @if($isFull)
+                                            <span class="badge badge-full" title="Cette équipe a atteint 15 joueurs">Pleine</span>
+                                        @endif
                                     </div>
                                 </div>
                                 <img src="{{ $equipe->logo }}" width="50" alt="">
