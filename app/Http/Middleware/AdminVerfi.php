@@ -16,7 +16,7 @@ class AdminVerfi
     public function handle(Request $request, Closure $next): Response
     {
         $user = $request->user();
-        if (!$user || $user !== "admin") {
+        if (!$user || $user->role->nom !== "admin") {
             return redirect(route('home'))->with('notAcces','acces refuser');
         } else {
             return $next($request);
