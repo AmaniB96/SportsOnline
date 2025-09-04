@@ -6,16 +6,23 @@
     @vite(['resources/css/home.css'])
 
     <div class="hero-carousel">
-        <div id="default-carousel" class="relative w-full" data-carousel="slide">
+        <div id="default-carousel" class="relative w-full" data-carousel="static">
             <!-- Carousel wrapper -->
             <div class="relative h-56 overflow-hidden md:h-96">
-                <!-- Item 1 -->
+                <!-- Item 1 - YouTube Video -->
                 <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
-                    <div class="overlay absolute inset-0 bg-black/50 z-10"></div>
-                    <img src="https://wallpapercave.com/wp/wp4430266.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Football">
-                    <div class="carousel-caption absolute z-20 text-center text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full px-4">
-                        <h2 class="text-3xl md:text-4xl font-bold mb-2">Le football dans toute sa splendeur</h2>
-                        <p class="text-lg md:text-xl">Découvrez les plus grandes équipes européennes</p>
+                    <div class="overlay absolute inset-0 bg-black/30 z-10 pointer-events-none"></div>
+                    <div class="video-container absolute inset-0 w-full h-full">
+                        <iframe width="100%" height="100%" 
+                            src="https://www.youtube.com/embed/zX0AV6yxyrQ?start=10&autoplay=1&mute=1&enablejsapi=1&controls=0&rel=0&modestbranding=1" 
+                            title="YouTube video player" frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="carousel-caption absolute z-20 text-center text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full px-4 pointer-events-none">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-2 text-shadow-lg">La Magie du Football</h2>
+                        <p class="text-lg md:text-xl text-shadow-md">Les plus beaux moments du sport roi</p>
                     </div>
                 </div>
                 <!-- Item 2 -->

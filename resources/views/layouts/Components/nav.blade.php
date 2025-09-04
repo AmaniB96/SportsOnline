@@ -32,26 +32,29 @@
       <div class="flex items-center space-x-4">
         <!-- Menu administration -->
         @auth
-          @if(auth()->user()->isAdmin ?? false)
-            <div class="hidden md:flex space-x-2 border-l border-gray-700 pl-4">
-              <a href="{{ route('back') }}" 
-                 class="rounded-md px-3 py-2 text-sm font-medium {{ request()->routeIs('back') ? 'bg-secondary text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}">
-                Dashboard
-              </a>
-              <a href="{{ route('back.player.index') }}" 
-                 class="rounded-md px-3 py-2 text-sm font-medium {{ request()->routeIs('back.player*') ? 'bg-secondary text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}">
-                Joueurs
-              </a>
-              <a href="{{ route('back.equipe.index') }}" 
-                 class="rounded-md px-3 py-2 text-sm font-medium {{ request()->routeIs('back.equipe*') ? 'bg-secondary text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}">
-                Équipes
-              </a>
-              <a href="{{ route('back.user.index') }}" 
-                 class="rounded-md px-3 py-2 text-sm font-medium {{ request()->routeIs('back.user*') ? 'bg-secondary text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}">
-                Utilisateurs
-              </a>
-            </div>
-          @endif
+        
+        <div class="hidden md:flex space-x-2 border-l border-gray-700 pl-4">
+
+          <a href="{{ route('back.player.index') }}" 
+             class="rounded-md px-3 py-2 text-sm font-medium {{ request()->routeIs('back.player*') ? 'bg-secondary text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}">
+            Vos Joueurs
+          </a>
+
+          <a href="{{ route('back.equipe.index') }}" 
+             class="rounded-md px-3 py-2 text-sm font-medium {{ request()->routeIs('back.equipe*') ? 'bg-secondary text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}">
+            Vos Équipes
+          </a>
+
+          @can('isAdmin')
+          
+            <a href="{{ route('back.user.index') }}" 
+              class="rounded-md px-3 py-2 text-sm font-medium {{ request()->routeIs('back.user*') ? 'bg-secondary text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}">
+              Utilisateurs
+            </a>
+
+          @endcan
+        </div>
+
         @endauth
 
         <!-- Profile dropdown -->
