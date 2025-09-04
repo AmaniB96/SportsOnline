@@ -15,8 +15,8 @@ Route::get('/equipe/joueur/{id}', [HomeController::class, 'show'])->name('home.s
 Route::get('/equipe/{id}', [HomeController::class, 'showEquipe'])->name('home.equipe.show');
 
 // Route::get('/back', [HomeController::class, 'back'])->name('back');
-Route::resource('back/player', JoueurController::class)->middleware([ConnecterVerif::class])->names('back.player');
-Route::resource('back/equipe', EquipeController::class)->middleware([ConnecterVerif::class])->names('back.equipe');
+Route::resource('back/player', JoueurController::class)->names('back.player');
+Route::resource('back/equipe', EquipeController::class)->names('back.equipe');
 Route::resource('back/user',ProfileController::class)->names('back.user');
 
 Route::get('/show/{id}', [JoueurController::class, 'show'])->name('joueur.show');

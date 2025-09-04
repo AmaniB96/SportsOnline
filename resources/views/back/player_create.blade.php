@@ -5,7 +5,7 @@
 @section('content')
    
     
-    <section class="mt-10 mb-5 p-5">
+    <section class="mt-32 mb-5 p-5">
         <div>
             @if(session('success'))
                 <div class="bg-green-600 text-white p-3 rounded mb-4">

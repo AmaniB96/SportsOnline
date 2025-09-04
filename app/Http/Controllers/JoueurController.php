@@ -8,8 +8,12 @@ use App\Models\Genre;
 use App\Models\Joueur;
 use App\Models\Photo;
 use Illuminate\Http\Request;
+<<<<<<< HEAD
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
+=======
+use Illuminate\Validation\Rule;
+>>>>>>> 3d4a0b2 (ça avance)
 
 class JoueurController extends Controller
 {
@@ -18,9 +22,13 @@ class JoueurController extends Controller
         $mesJoueurs = Joueur::where('user_id', auth()->id())->get();
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> fc53862 (je mets des test et des machin)
 
+=======
+        
+>>>>>>> 3d4a0b2 (ça avance)
         $joueursAvecUser = Joueur::with('user')->get();
 
         $joueursParRoleEtUser = $joueursAvecUser->groupBy(function($joueur) {
@@ -37,6 +45,7 @@ class JoueurController extends Controller
         $joueursUser = $joueursParRoleEtUser->get('user', collect());
 
         $joueursCoach = $joueursParRoleEtUser->get('coach', collect());
+<<<<<<< HEAD
 
         return view('back.player', compact('joueurs', 'mesJoueurs', 'joueursUser', 'joueursCoach', 'joueursParTypeEtUser'));
 <<<<<<< HEAD
@@ -55,6 +64,9 @@ class JoueurController extends Controller
 >>>>>>> 0661d39 (var ok pour joueur)
 =======
 >>>>>>> fc53862 (je mets des test et des machin)
+=======
+        return view('back.player', compact('joueurs', 'mesJoueurs', 'joueursUser', 'joueursCoach', 'joueursParRoleEtUser','joueursUser','joueursCoach'));
+>>>>>>> 3d4a0b2 (ça avance)
     }
 
     
@@ -121,6 +133,7 @@ class JoueurController extends Controller
                 'phone' => $request->phone,
                 'email' => $request->email,
                 'pays' => $request->pays,
+                'equipe_id' => $request->equipe_id,
                 'position_id' => $request->position_id,
                 'genre_id' => $request->genre_id,
                 'user_id' => auth()->id(),
@@ -150,9 +163,11 @@ class JoueurController extends Controller
         $genres = Genre::all();
         $equipes = Equipe::all();
         $positions = Position::all();
+        $this->authorize('view', $joueur);
         return view('back.player_show', compact('joueur', 'genres', 'equipes', 'positions'));
     }
 
+<<<<<<< HEAD
     public function update(Request $request, $id)
     {
         $joueur = Joueur::findOrFail($id);
@@ -225,10 +240,55 @@ class JoueurController extends Controller
             DB::rollBack();
             return back()->withInput()->with('error', 'Erreur serveur. Réessayez.');
         }
+=======
+    public function update(Request $request, $id) {
+        
+        $request->validate([
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users')->ignore($id),
+            ],
+        ]);
+        $joueur = Joueur::findOrFail($id);
+        $this->authorize('update', $joueur);
+
+
+        $joueur->nom = $request->nom; 
+        $joueur->prenom = $request->prenom; 
+        $joueur->age = $request->age; 
+        $joueur->phone = $request->phone;
+        $joueur->equipe_id = $request->equipe_id;
+        $joueur->email = $request->email; 
+        $joueur->pays = $request->pays;
+        $joueur->position_id = $request->position_id;
+        $joueur->genre_id = $request->genre_id;
+        
+        $joueur->update();
+
+        if($request->hasFile('image')){
+            $photo = Photo::findOrFail($id);
+            $file = $request->file('image');
+            $filename = time().''.$file->getClientOriginalName();
+            $path = $file->storeAs('joueurs', $filename, 'public');
+            $pathSt = "storage/$path";
+            $photo->src = $pathSt;
+            
+            $photo->update();
+        }
+
+        return redirect()->route('back.player.show',$joueur->id);
+>>>>>>> 3d4a0b2 (ça avance)
     }
 
     public function destroy($id) {
-        Joueur::findOrFail($id)->delete();
-        return redirect()->route('back.player.index');
+        $joueur = Joueur::findOrFail($id);
+
+        $this->authorize('delete', $joueur);
+
+        $joueur->delete();
+
+        return redirect()->route('back.player.index')
+                        ->with('success', 'Joueur supprimé avec succès.');
     }
 }
