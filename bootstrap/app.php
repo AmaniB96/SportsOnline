@@ -17,8 +17,13 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        $exceptions->render(function (AuthorizationException $e, Request $request) {
-            // Redirige vers la route 'home' avec un message flash
-            return Redirect::route('home')->with('error', 'Accès refusé.');
+        $exceptions->render(function ($e, Request $request) {
+            if ($e instanceof AuthorizationException || ($e instanceof HttpException && $e->getStatusCode() === 403)) {
+                if ($request->expectsJson()) {
+                    return Redirect::route('home')->with('error', 'Accès refusé.');
+                }
+                return Redirect::route('home')->with('error', 'Accès refusé.');
+            }
+            return parent::render($request, $e);
         });
     })->create();
