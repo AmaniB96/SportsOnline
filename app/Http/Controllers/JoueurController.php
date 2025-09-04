@@ -16,6 +16,7 @@ class JoueurController extends Controller
     public function index() {
         $joueurs = Joueur::orderBy('equipe_id','desc')->get();
         $mesJoueurs = Joueur::where('user_id', auth()->id())->get();
+<<<<<<< HEAD
 
         $joueursAvecUser = Joueur::with('user')->get();
 
@@ -35,6 +36,12 @@ class JoueurController extends Controller
         $joueursCoach = $joueursParRoleEtUser->get('coach', collect());
 
         return view('back.player', compact('joueurs', 'mesJoueurs', 'joueursUser', 'joueursCoach', 'joueursParTypeEtUser'));
+=======
+        $joueursUser = Joueur::whereHas('user', function ($query) {
+            $query->where('role_id', 2);
+        })->get();
+        return view('back.player', compact('joueurs','joueursUser','mesJoueur'));
+>>>>>>> 830e074 (var pour les user afficher)
     }
 
     
