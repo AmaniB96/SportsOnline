@@ -20,7 +20,9 @@ Route::resource('back/player', JoueurController::class)->names('back.player');
 Route::resource('back/equipe', EquipeController::class)->names('back.equipe');
 Route::resource('back/user',ProfileController::class)->names('back.user');
 
+Route::put("back/user/index",[RoleController::class,'index'])->name('back.use.index');
 Route::put("back/role/update/{id}",[RoleController::class,'update'])->name('back.role.update');
+
 
 Route::get('/show/{id}', [JoueurController::class, 'show'])->name('joueur.show');
 

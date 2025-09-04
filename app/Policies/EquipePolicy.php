@@ -30,7 +30,7 @@ class EquipePolicy
      */
     public function create(User $user): bool
     {
-        if ($user->role === 'admin' || $user->role === 'coach') {
+        if ($user->role->nom === 'admin' || $user->role->nom === 'coach') {
             return true;
         }
         return false;

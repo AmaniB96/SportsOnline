@@ -3,7 +3,7 @@
 @section('title','Ajouter une équipe')
 
 @section('content')
-    <section class="m-10 p-6 bg-white rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+    <section class="mt-48 m-10 p-6 bg-white rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
         <div class="bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 p-4">
 
             @if ($errors->any())
