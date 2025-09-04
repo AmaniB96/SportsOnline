@@ -208,44 +208,6 @@ class JoueurController extends Controller
             DB::rollBack();
             return back()->withInput()->with('error', 'Erreur serveur. Réessayez.');
         }
-
-    public function update(Request $request, $id) {
-        
-        $request->validate([
-            'email' => [
-                'required',
-                'email',
-                Rule::unique('users')->ignore($id),
-            ],
-        ]);
-        $joueur = Joueur::findOrFail($id);
-        $this->authorize('update', $joueur);
-
-
-        $joueur->nom = $request->nom; 
-        $joueur->prenom = $request->prenom; 
-        $joueur->age = $request->age; 
-        $joueur->phone = $request->phone;
-        $joueur->equipe_id = $request->equipe_id;
-        $joueur->email = $request->email; 
-        $joueur->pays = $request->pays;
-        $joueur->position_id = $request->position_id;
-        $joueur->genre_id = $request->genre_id;
-        
-        $joueur->update();
-
-        if($request->hasFile('image')){
-            $photo = Photo::findOrFail($id);
-            $file = $request->file('image');
-            $filename = time().''.$file->getClientOriginalName();
-            $path = $file->storeAs('joueurs', $filename, 'public');
-            $pathSt = "storage/$path";
-            $photo->src = $pathSt;
-            
-            $photo->update();
-        }
-
-        return redirect()->route('back.player.show');
     }
 
     public function destroy($id)
