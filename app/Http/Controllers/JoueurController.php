@@ -13,7 +13,11 @@ class JoueurController extends Controller
 {
     public function index() {
         $joueurs = Joueur::orderBy('equipe_id','desc')->get();
-        return view('back.player', compact('joueurs'));
+        $mesJoueurs = Joueur::where('user_id', auth()->id())->get();
+        $joueursUser = Joueur::whereHas('user', function ($query) {
+            $query->where('role_id', 2);
+        })->get();
+        return view('back.player', compact('joueurs','joueursUser','mesJoueur'));
     }
     
     public function create() {
