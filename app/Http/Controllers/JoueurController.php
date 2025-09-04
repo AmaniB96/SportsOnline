@@ -14,14 +14,27 @@ class JoueurController extends Controller
     public function index() {
         $joueurs = Joueur::orderBy('equipe_id','desc')->get();
         $mesJoueurs = Joueur::where('user_id', auth()->id())->get();
-        $joueursUser = Joueur::whereHas('user', function ($query) {
-            $query->where('role_id', 1);
-        })->get();
-        $joueursCoach = Joueur::whereHas('user', function ($query) {
-            $query->where('role_id', 2);
-        })->get();
-        return view('back.player', compact('joueurs','joueursUser','mesJoueur','joueursCoach'));
+
+        $joueursAvecUser = Joueur::with('user')->get();
+
+        $joueursParRoleEtUser = $joueursAvecUser->groupBy(function($joueur) {
+            if (!$joueur->user) {
+                return 'sans_user';
+            }
+            return $joueur->user->role_id == 1 ? 'user' : 'coach';
+        })->map(function($group) {
+            return $group->groupBy(function($joueur) {
+                return $joueur->user_id ?? 'inconnu';
+            });
+        });
+
+        $joueursUser = $joueursParRoleEtUser->get('user', collect());
+
+        $joueursCoach = $joueursParRoleEtUser->get('coach', collect());
+
+        return view('back.player', compact('joueurs', 'mesJoueurs', 'joueursUser', 'joueursCoach', 'joueursParTypeEtUser'));
     }
+
     
     public function create() {
         $joueurs = Joueur::all();
