@@ -73,14 +73,14 @@
 
           <el-menu anchor="top end" popover class="w-48 mt-5 origin-top-right rounded-md bg-white py-1 shadow-lg outline outline-black/5 transition transition-discrete ...">
               @auth
-                  {{-- <a href="{{ route('profile.show') }}" class="block px-4 py-2 text-sm text-gray-700 focus:bg-gray-100 focus:outline-hidden">Your profile</a> --}}
-                  <a href="{{ route('logout') }}"
-                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                    class="block px-4 py-2 text-sm text-gray-700 focus:bg-gray-100 focus:outline-hidden">Sign out</a>
-                  <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">@csrf</form>
+                <a href="/profile" class="block px-4 py-2 text-sm text-gray-700 focus:bg-gray-100 focus:outline-hidden">Your profile</a>
+                <a href="{{ route('logout') }}"
+                  onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                  class="block px-4 py-2 text-sm text-gray-700 focus:bg-gray-100 focus:outline-hidden">Sign out</a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">@csrf</form>
               @else
-                  <a href="{{ route('login') }}" class="block px-4 py-2 text-sm text-gray-700 focus:bg-gray-100 focus:outline-hidden">Login</a>
-                  <a href="{{ route('register') }}" class="block px-4 py-2 text-sm text-gray-700 focus:bg-gray-100 focus:outline-hidden">Register</a>
+                <a href="{{ route('login') }}" class="block px-4 py-2 text-sm text-gray-700 focus:bg-gray-100 focus:outline-hidden">Login</a>
+                <a href="{{ route('register') }}" class="block px-4 py-2 text-sm text-gray-700 focus:bg-gray-100 focus:outline-hidden">Register</a>
               @endauth
           </el-menu>
         </el-dropdown>
