@@ -44,48 +44,27 @@
                     <div class="player-stats-container">
                         <h2 class="stats-title">Statistiques</h2>
                         <div class="player-stats">
-                            <div class="stat-bar">
-                                <span class="stat-label">Vitesse</span>
-                                <div class="stat-track">
-                                    <div class="stat-fill" style="width: {{ rand(60, 99) }}%"></div>
+                            @php
+                                // Générer les statistiques une fois pour les réutiliser
+                                $stats = [
+                                    'Vitesse' => rand(60, 99),
+                                    'Tir' => rand(60, 99),
+                                    'Passe' => rand(60, 99),
+                                    'Dribble' => rand(60, 99),
+                                    'Défense' => rand(60, 99),
+                                    'Physique' => rand(60, 99)
+                                ];
+                            @endphp
+                            
+                            @foreach($stats as $label => $value)
+                                <div class="stat-bar">
+                                    <span class="stat-label">{{ $label }}</span>
+                                    <div class="stat-track">
+                                        <div class="stat-fill" style="width: {{ $value }}%"></div>
+                                    </div>
+                                    <span class="stat-value">{{ $value }}</span>
                                 </div>
-                                <span class="stat-value">{{ rand(60, 99) }}</span>
-                            </div>
-                            <div class="stat-bar">
-                                <span class="stat-label">Tir</span>
-                                <div class="stat-track">
-                                    <div class="stat-fill" style="width: {{ rand(60, 99) }}%"></div>
-                                </div>
-                                <span class="stat-value">{{ rand(60, 99) }}</span>
-                            </div>
-                            <div class="stat-bar">
-                                <span class="stat-label">Passe</span>
-                                <div class="stat-track">
-                                    <div class="stat-fill" style="width: {{ rand(60, 99) }}%"></div>
-                                </div>
-                                <span class="stat-value">{{ rand(60, 99) }}</span>
-                            </div>
-                            <div class="stat-bar">
-                                <span class="stat-label">Dribble</span>
-                                <div class="stat-track">
-                                    <div class="stat-fill" style="width: {{ rand(60, 99) }}%"></div>
-                                </div>
-                                <span class="stat-value">{{ rand(60, 99) }}</span>
-                            </div>
-                            <div class="stat-bar">
-                                <span class="stat-label">Défense</span>
-                                <div class="stat-track">
-                                    <div class="stat-fill" style="width: {{ rand(60, 99) }}%"></div>
-                                </div>
-                                <span class="stat-value">{{ rand(60, 99) }}</span>
-                            </div>
-                            <div class="stat-bar">
-                                <span class="stat-label">Physique</span>
-                                <div class="stat-track">
-                                    <div class="stat-fill" style="width: {{ rand(60, 99) }}%"></div>
-                                </div>
-                                <span class="stat-value">{{ rand(60, 99) }}</span>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                     
