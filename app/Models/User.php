@@ -6,6 +6,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+
 
 class User extends Authenticatable
 {
@@ -23,6 +25,7 @@ class User extends Authenticatable
         'role_id',
         'email',
         'password',
+        'profile_photo_path',
     ];
 
     /**
@@ -52,5 +55,17 @@ class User extends Authenticatable
     }
     public function equipe(){
         return $this->hasMany(Equipe::class);
+    }
+
+    protected function profilePhotoUrl(): Attribute
+    {
+        return Attribute::get(function () {
+            if ($this->profile_photo_path) {
+                return asset('storage/' . $this->profile_photo_path);
+            }
+
+            // Génère une image par défaut avec les initiales
+            return 'https://ui-avatars.com/api/?name=' . urlencode($this->nom . ' ' . $this->prenom) . '&color=FFFFFF&background=020617';
+        });
     }
 }

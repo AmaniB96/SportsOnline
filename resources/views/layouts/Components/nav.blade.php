@@ -73,9 +73,15 @@
           <el-dropdown class="relative">
             <button class="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-800">
               <span class="sr-only">Open user menu</span>
-              <img class="h-10 w-10 rounded-full object-cover border-2 border-primary" 
-                   src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" 
-                   alt="Photo de profil">
+              @auth
+                <img class="h-10 w-10 rounded-full object-cover border-2 border-primary" 
+                     src="{{ Auth::user()->profilePhotoUrl }}" 
+                     alt="Photo de profil de {{ Auth::user()->nom }}">
+              @else
+                <img class="h-10 w-10 rounded-full object-cover border-2 border-primary" 
+                     src="https://ui-avatars.com/api/?name=?&color=FFFFFF&background=020617" 
+                     alt="Avatar par défaut">
+              @endauth
             </button>
             
             <el-menu anchor="top end" popover class="w-48 mt-2 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5">

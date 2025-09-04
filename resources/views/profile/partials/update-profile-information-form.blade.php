@@ -1,21 +1,25 @@
 <section>
     <header>
-        <h2 class="text-lg font-medium text-gray-900">
-            {{ __('information du profile') }}
+        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+            {{ __('Profile Information') }}
         </h2>
-
-        <p class="mt-1 text-sm text-gray-600">
-            {{ __("Mettre un a jour votre profil") }}
-        </p>
     </header>
 
-    <form id="send-verification" method="post" action="{{ route('verification.send') }}">
-        @csrf
-    </form>
-
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
         @csrf
         @method('patch')
+
+        {{-- Section pour la photo de profil --}}
+        <div>
+            <x-input-label for="photo" :value="__('Photo')" />
+            <div class="mt-2 flex items-center gap-x-3">
+                <img class="h-20 w-20 rounded-full object-cover" src="{{ auth()->user()->profilePhotoUrl }}" alt="Current profile photo" />
+                <div>
+                    <input name="photo" id="photo" type="file" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100"/>
+                    <x-input-error class="mt-2" :messages="$errors->get('photo')" />
+                </div>
+            </div>
+        </div>
 
         <div>
             <x-input-label for="nom" :value="__('Nom')" />
@@ -53,17 +57,7 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('mise a jour') }}</x-primary-button>
-
-            @if (session('status') === 'profile-updated')
-                <p
-                    x-data="{ show: true }"
-                    x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600"
-                >{{ __('Sauvegarder.') }}</p>
-            @endif
+            <x-primary-button>{{ __('Save') }}</x-primary-button>
         </div>
     </form>
 </section>
