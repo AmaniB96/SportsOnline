@@ -209,7 +209,7 @@
                             @if($joueur->photo)
                                 <img src="{{ asset( $joueur->photo->src) }}" class="fut-player-img" alt="{{ $joueur->nom }}">
                             @endif
-                            <div class="fut-player-name">{{ $joueur->nom }}</div>
+                            <div class="fut-player-name">{{ $joueuse->prenom }} {{ $joueuse->nom }}</div>
                             <div class="fut-player-stats">
                                 <div class="stat"><span>{{ rand(60, 99) }}</span>VIT</div>
                                 <div class="stat"><span>{{ rand(60, 99) }}</span>TIR</div>
